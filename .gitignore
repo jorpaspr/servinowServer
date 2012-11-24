@@ -16,4 +16,5 @@ app/config/parameters.yml
 nbproject
 nbproject/*
 
-nbproject
+# composer file
+composer.phar
