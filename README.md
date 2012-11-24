@@ -1,7 +1,7 @@
 Servinow standar installation
 =============================
 
-1) Install vender dependencies of symfony2:
+1) Install all vendor dependencies of symfony2:
 -------------------------------------------
 
 Install first all vendor dependencies. So YOU HAVE TO download composer:
