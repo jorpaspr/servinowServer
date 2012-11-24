@@ -1,3 +1,7 @@
+servinow_navigation:
+    resource: "@ServinowNavigationBundle/Resources/config/routing.yml"
+    prefix:   /
+
 servinow_restaurant_drawer:
     resource: "@ServinowRestaurantDrawerBundle/Resources/config/routing.yml"
     prefix:   /
