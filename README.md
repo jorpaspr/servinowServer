@@ -2,15 +2,18 @@ Servinow standar installation
 =============================
 
 1) Clone the project:
+---------------------
 
 Clone the project.
 
 2) Configure it:
+----------------
+
 In app/config there are a parametersORIGINAL.yml *COPY* it and rename it to parameters.yml
 Configure it with your database info.
 
 3) Install all vendor dependencies of symfony2:
--------------------------------------------
+-----------------------------------------------
 
 Install first all vendor dependencies. So YOU HAVE TO download composer:
 
