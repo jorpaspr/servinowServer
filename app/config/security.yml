@@ -21,6 +21,10 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+            
+        withoutseccurity:
+            pattern: ^/*$
+            anonymous: true
 
 #        login:
 #            pattern:  ^/demo/secured/login$
