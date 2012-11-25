@@ -13,9 +13,10 @@ a:focus {outline: none;}
 	background-color: #333;
 	box-shadow: 0 1px 3px #333333;
 	height: 50px;
+	position: relative;
 }
 
-#container > header * {
+#container > header *, #footer * {
 	color: #F5F5F5;
 	font-family: serif;
 }
@@ -28,7 +29,7 @@ a:focus {outline: none;}
 	height: 50px;
 }
 
-#container > header h1 p{
+#container > header h1 span{
 	display: table-cell;
 	vertical-align: middle;
 }
@@ -82,4 +83,29 @@ a:focus {outline: none;}
 
 #userAccount {
 	float: right;
+	display: table;
+	height: 50px;
+	padding: 0 10px;
+}
+#userAccount p {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: right;
+}
+
+#userAccount p a {
+}
+
+#content {
+	display: block;
+	margin: 0 auto;
+	width: 90%;
+	min-height: 100px;
+}
+
+#footer {
+	display: block;
+	text-align: center;
+	background-color: #333;
+	box-shadow: 0 -1px 3px #333333;
 }

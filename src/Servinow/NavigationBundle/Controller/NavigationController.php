@@ -7,13 +7,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class NavigationController extends Controller {
 
 	public function indexAction() {
-		return $this->render('ServinowNavigationBundle:Navigation:index.html.twig', array('name' => "world"));
+		//TODO
+		return $this->render('ServinowNavigationBundle:Navigation:index.html.twig');
 	}
 
 	public function userAccountBlockAction() {
 		//TODO
 		return $this->render('ServinowNavigationBundle:Navigation:userAccountBlock.html.twig',
-				array('userName' => "Paquito"));
+				array(
+					'userName' => 'Paquito',
+					'job' => 'Camarero'));
 	}
 
 }
