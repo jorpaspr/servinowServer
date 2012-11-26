@@ -1,3 +1,7 @@
+servinow_entities:
+    resource: "@ServinowEntitiesBundle/Resources/config/routing.yml"
+    prefix:   /
+
 servinow_movimientos_de_caja:
     resource: "@ServinowMovimientosDeCajaBundle/Resources/config/routing.yml"
     prefix:   /caja

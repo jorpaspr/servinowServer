@@ -1,0 +1,7 @@
+parameters:
+#    servinow_entities.example.class: Servinow\EntitiesBundle\Example
+
+services:
+#    servinow_entities.example:
+#        class: %servinow_entities.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
