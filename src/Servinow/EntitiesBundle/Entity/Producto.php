@@ -36,11 +36,11 @@ class Producto
     private $imagen;
 
     /**
-     * @var string $description
+     * @var string $descripcion
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="descripcion", type="text")
      */
-    private $description;
+    private $descripcion;
 
     /**
      * @var float $precio
@@ -56,6 +56,26 @@ class Producto
      */
     private $cantDisponible;
 
+    /**
+     * @ORM\OneToMany(targetEntity="LineaPedido", mappedBy="producto")
+     */
+    private $lineasPedido;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Restaurante", inversedBy="productos")
+     * @ORM\JoinColumn(name="restaurante_id", referencedColumnName="id")
+     */
+    private $restaurante;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Categoria", mappedBy="productos")
+     */
+    private $categorias;
+
+    
+    public function __construct() {
+        $this->categorias = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -180,5 +200,117 @@ class Producto
     public function getCantDisponible()
     {
         return $this->cantDisponible;
+    }
+
+    /**
+     * Add lineasPedido
+     *
+     * @param Servinow\EntitiesBundle\Entity\LineaPedido $lineasPedido
+     * @return Producto
+     */
+    public function addLineasPedido(\Servinow\EntitiesBundle\Entity\LineaPedido $lineasPedido)
+    {
+        $this->lineasPedido[] = $lineasPedido;
+    
+        return $this;
+    }
+
+    /**
+     * Remove lineasPedido
+     *
+     * @param Servinow\EntitiesBundle\Entity\LineaPedido $lineasPedido
+     */
+    public function removeLineasPedido(\Servinow\EntitiesBundle\Entity\LineaPedido $lineasPedido)
+    {
+        $this->lineasPedido->removeElement($lineasPedido);
+    }
+
+    /**
+     * Get lineasPedido
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getLineasPedido()
+    {
+        return $this->lineasPedido;
+    }
+
+    /**
+     * Set restaurante
+     *
+     * @param Servinow\EntitiesBundle\Entity\Restaurante $restaurante
+     * @return Producto
+     */
+    public function setRestaurante(\Servinow\EntitiesBundle\Entity\Restaurante $restaurante = null)
+    {
+        $this->restaurante = $restaurante;
+    
+        return $this;
+    }
+
+    /**
+     * Get restaurante
+     *
+     * @return Servinow\EntitiesBundle\Entity\Restaurante 
+     */
+    public function getRestaurante()
+    {
+        return $this->restaurante;
+    }
+
+    /**
+     * Add categorias
+     *
+     * @param Servinow\EntitiesBundle\Entity\Categoria $categorias
+     * @return Producto
+     */
+    public function addCategoria(\Servinow\EntitiesBundle\Entity\Categoria $categorias)
+    {
+        $this->categorias[] = $categorias;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categorias
+     *
+     * @param Servinow\EntitiesBundle\Entity\Categoria $categorias
+     */
+    public function removeCategoria(\Servinow\EntitiesBundle\Entity\Categoria $categorias)
+    {
+        $this->categorias->removeElement($categorias);
+    }
+
+    /**
+     * Get categorias
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategorias()
+    {
+        return $this->categorias;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Producto
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
     }
 }

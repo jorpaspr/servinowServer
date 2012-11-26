@@ -35,7 +35,17 @@ class Categoria
      */
     private $imagen;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Producto", inversedBy="categorias")
+     * @ORM\JoinTable(name="categorias_productos")
+     */
+    private $productos;
 
+    
+    public function __construct() {
+        $this->productos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -90,5 +100,38 @@ class Categoria
     public function getImagen()
     {
         return $this->imagen;
+    }
+
+    /**
+     * Add productos
+     *
+     * @param Servinow\EntitiesBundle\Entity\Producto $productos
+     * @return Categoria
+     */
+    public function addProducto(\Servinow\EntitiesBundle\Entity\Producto $productos)
+    {
+        $this->productos[] = $productos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove productos
+     *
+     * @param Servinow\EntitiesBundle\Entity\Producto $productos
+     */
+    public function removeProducto(\Servinow\EntitiesBundle\Entity\Producto $productos)
+    {
+        $this->productos->removeElement($productos);
+    }
+
+    /**
+     * Get productos
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProductos()
+    {
+        return $this->productos;
     }
 }

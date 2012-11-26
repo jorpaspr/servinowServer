@@ -56,7 +56,29 @@ class Restaurante
      */
     private $cantDisponible;
 
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Pedido", mappedBy="restaurante")
+     */
+    private $pedidos;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Producto", mappedBy="restaurante")
+     */
+    private $productos;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Mesa", mappedBy="restaurante")
+     */
+    private $mesas;
 
+    
+    public function __construct() {
+        $this->pedidos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->productos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->mesas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -180,5 +202,104 @@ class Restaurante
     public function getCantDisponible()
     {
         return $this->cantDisponible;
+    }
+
+    /**
+     * Add pedidos
+     *
+     * @param Servinow\EntitiesBundle\Entity\Pedido $pedidos
+     * @return Restaurante
+     */
+    public function addPedido(\Servinow\EntitiesBundle\Entity\Pedido $pedidos)
+    {
+        $this->pedidos[] = $pedidos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove pedidos
+     *
+     * @param Servinow\EntitiesBundle\Entity\Pedido $pedidos
+     */
+    public function removePedido(\Servinow\EntitiesBundle\Entity\Pedido $pedidos)
+    {
+        $this->pedidos->removeElement($pedidos);
+    }
+
+    /**
+     * Get pedidos
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPedidos()
+    {
+        return $this->pedidos;
+    }
+
+    /**
+     * Add productos
+     *
+     * @param Servinow\EntitiesBundle\Entity\Producto $productos
+     * @return Restaurante
+     */
+    public function addProducto(\Servinow\EntitiesBundle\Entity\Producto $productos)
+    {
+        $this->productos[] = $productos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove productos
+     *
+     * @param Servinow\EntitiesBundle\Entity\Producto $productos
+     */
+    public function removeProducto(\Servinow\EntitiesBundle\Entity\Producto $productos)
+    {
+        $this->productos->removeElement($productos);
+    }
+
+    /**
+     * Get productos
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * Add mesas
+     *
+     * @param Servinow\EntitiesBundle\Entity\Mesa $mesas
+     * @return Restaurante
+     */
+    public function addMesa(\Servinow\EntitiesBundle\Entity\Mesa $mesas)
+    {
+        $this->mesas[] = $mesas;
+    
+        return $this;
+    }
+
+    /**
+     * Remove mesas
+     *
+     * @param Servinow\EntitiesBundle\Entity\Mesa $mesas
+     */
+    public function removeMesa(\Servinow\EntitiesBundle\Entity\Mesa $mesas)
+    {
+        $this->mesas->removeElement($mesas);
+    }
+
+    /**
+     * Get mesas
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMesas()
+    {
+        return $this->mesas;
     }
 }

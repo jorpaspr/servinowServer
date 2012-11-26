@@ -42,7 +42,23 @@ class Pedido
      */
     private $confirmado;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="LineaPedido", mappedBy="pedido")
+     */
+    private $lineasPedido;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Restaurante", inversedBy="pedidos")
+     * @ORM\JoinColumn(name="restaurante_id", referencedColumnName="id")
+     */
+    private $restaurante;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Mesa", inversedBy="pedidos")
+     * @ORM\JoinColumn(name="mesa_id", referencedColumnName="id")
+     */
+    private $mesa;
+    
     /**
      * Get id
      *
@@ -120,5 +136,91 @@ class Pedido
     public function getConfirmado()
     {
         return $this->confirmado;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lineasPedido = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add lineasPedido
+     *
+     * @param Servinow\EntitiesBundle\Entity\LineaPedido $lineasPedido
+     * @return Pedido
+     */
+    public function addLineasPedido(\Servinow\EntitiesBundle\Entity\LineaPedido $lineasPedido)
+    {
+        $this->lineasPedido[] = $lineasPedido;
+    
+        return $this;
+    }
+
+    /**
+     * Remove lineasPedido
+     *
+     * @param Servinow\EntitiesBundle\Entity\LineaPedido $lineasPedido
+     */
+    public function removeLineasPedido(\Servinow\EntitiesBundle\Entity\LineaPedido $lineasPedido)
+    {
+        $this->lineasPedido->removeElement($lineasPedido);
+    }
+
+    /**
+     * Get lineasPedido
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getLineasPedido()
+    {
+        return $this->lineasPedido;
+    }
+
+    /**
+     * Set restaurante
+     *
+     * @param Servinow\EntitiesBundle\Entity\Restaurante $restaurante
+     * @return Pedido
+     */
+    public function setRestaurante(\Servinow\EntitiesBundle\Entity\Restaurante $restaurante = null)
+    {
+        $this->restaurante = $restaurante;
+    
+        return $this;
+    }
+
+    /**
+     * Get restaurante
+     *
+     * @return Servinow\EntitiesBundle\Entity\Restaurante 
+     */
+    public function getRestaurante()
+    {
+        return $this->restaurante;
+    }
+
+    /**
+     * Set mesa
+     *
+     * @param Servinow\EntitiesBundle\Entity\Mesa $mesa
+     * @return Pedido
+     */
+    public function setMesa(\Servinow\EntitiesBundle\Entity\Mesa $mesa = null)
+    {
+        $this->mesa = $mesa;
+    
+        return $this;
+    }
+
+    /**
+     * Get mesa
+     *
+     * @return Servinow\EntitiesBundle\Entity\Mesa 
+     */
+    public function getMesa()
+    {
+        return $this->mesa;
     }
 }

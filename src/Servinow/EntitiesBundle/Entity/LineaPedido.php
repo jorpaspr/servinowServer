@@ -3,7 +3,6 @@
 namespace Servinow\EntitiesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Servinow\EntitiesBundle\Entity\LineaPedido
  *
@@ -34,7 +33,19 @@ class LineaPedido
      * @ORM\Column(name="estado", type="string", length=255)
      */
     private $estado;
-
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Pedido", inversedBy="lineasPedido")
+     * @ORM\JoinColumn(name="pedido_id", referencedColumnName="id")
+     */
+    private $pedido;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Producto", inversedBy="lineasPedido")
+     * @ORM\JoinColumn(name="producto_id", referencedColumnName="id")
+     */
+    private $producto;
+    
 
     /**
      * Get id
@@ -90,5 +101,51 @@ class LineaPedido
     public function getEstado()
     {
         return $this->estado;
+    }
+
+    /**
+     * Set pedido
+     *
+     * @param Servinow\EntitiesBundle\Entity\Pedido $pedido
+     * @return LineaPedido
+     */
+    public function setPedido(\Servinow\EntitiesBundle\Entity\Pedido $pedido = null)
+    {
+        $this->pedido = $pedido;
+    
+        return $this;
+    }
+
+    /**
+     * Get pedido
+     *
+     * @return Servinow\EntitiesBundle\Entity\Pedido 
+     */
+    public function getPedido()
+    {
+        return $this->pedido;
+    }
+
+    /**
+     * Set producto
+     *
+     * @param Servinow\EntitiesBundle\Entity\Producto $producto
+     * @return LineaPedido
+     */
+    public function setProducto(\Servinow\EntitiesBundle\Entity\Producto $producto = null)
+    {
+        $this->producto = $producto;
+    
+        return $this;
+    }
+
+    /**
+     * Get producto
+     *
+     * @return Servinow\EntitiesBundle\Entity\Producto 
+     */
+    public function getProducto()
+    {
+        return $this->producto;
     }
 }
