@@ -7,8 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Servinow\EntitiesBundle\Entity\Producto
  *
+ * 
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Servinow\EntitiesBundle\Entity\ProductoRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"producto" = "Producto", "plato" = "Plato", "menu" = "Menu"})
  */
 class Producto
 {
