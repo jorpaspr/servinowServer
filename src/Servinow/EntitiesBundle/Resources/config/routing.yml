@@ -1,3 +1,0 @@
-servinow_entities_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ServinowEntitiesBundle:Default:index }
