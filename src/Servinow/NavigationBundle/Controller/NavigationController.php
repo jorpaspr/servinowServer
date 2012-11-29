@@ -8,7 +8,8 @@ class NavigationController extends Controller {
 
 	public function indexAction() {
 		//TODO
-		return $this->render('ServinowNavigationBundle:Navigation:index.html.twig');
+		return $this->render('ServinowNavigationBundle:Navigation:index.html.twig'
+				, array('restaurantID' => 1));
 	}
 
 	public function userAccountBlockAction() {

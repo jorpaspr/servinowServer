@@ -1,3 +1,3 @@
 servinow_restaurant_drawer_homepage:
-    pattern:  /organizador
-    defaults: { _controller: ServinowRestaurantDrawerBundle:Default:index }
+    pattern:  /
+    defaults: { _controller: ServinowRestaurantDrawerBundle:Drawer:index }

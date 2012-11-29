@@ -1,0 +1,55 @@
+{% extends 'ServinowNavigationBundle:Navigation:index.html.twig' %}
+
+
+{% block content %}
+<h2>{{"Personalice el espacio de su restaurante" | trans}}</h2>
+
+<canvas id="drawerCanvas" ></canvas>
+
+<div id="formDraggers" >
+	<div id="formDraggers_floor" >
+		<div class="object" >{{"Objecto" | trans}}</div>
+		<div class="description" >{{"Coloree la forma de su restaurante." | trans}}</div>
+	</div>
+	<div id="formDraggers_object" >
+		<div class="object"><span>{{"Ventana" | trans}}</span></div>
+		<div class="description" >{{"Cree un componente" | trans}}</div>
+		<div class="configRight">
+			<label>
+				<span>{{"Largo" | trans}}:</span>
+				<input type="number" step="1" min="1" >
+			</label>
+			<label>
+				<span>{{"Ancho" | trans}}:</span>
+				<input type="number" step="1" min="1" >
+			</label>
+		</div>
+	</div>
+	<div id="formDraggers_table" >
+		<div class="object"><span>{{"Mesa" | trans}}</span></div>
+		<div class="description" >{{"Cree una mesa" | trans}}</div>
+		<div class="configRight">
+			<label>
+				<span>{{"Largo" | trans}}:</span>
+				<input type="number" step="1" min="1" >
+			</label>
+			<label>
+				<span>{{"Ancho" | trans}}:</span>
+				<input type="number" step="1" min="1" >
+			</label>
+		</div>
+		<div class="configBottom">
+			<span>{{"Comensales"}} </span>
+			<label>
+				<span>{{"mínimos" | trans}}:</span>
+				<input type="number" step="1" min="1">
+			</label>
+			<label>
+				<span>{{"y máximos" | trans}}:</span>
+				<input type="number" step="1" min="1">
+			</label>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
