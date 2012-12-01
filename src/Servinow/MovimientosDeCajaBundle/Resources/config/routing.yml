@@ -1,40 +1,40 @@
 
 # General
 servinow_movimientos_de_caja_general:
-    pattern:  /general
+    pattern:  /{restaurantID}/caja/general
     defaults: { _controller: ServinowMovimientosDeCajaBundle:General:ingresos }
 
 servinow_movimientos_de_caja_general_pago:
-    pattern:  /general/pago
+    pattern:  /{restaurantID}/caja/general/pago
     defaults: { _controller: ServinowMovimientosDeCajaBundle:General:pago }
     
 servinow_movimientos_de_caja_general_ingresos:
-    pattern:  /general/ingresos
+    pattern:  /{restaurantID}/caja/general/ingresos
     defaults: { _controller: ServinowMovimientosDeCajaBundle:General:ingresos }
 
 servinow_movimientos_de_caja_general_pedidos:
-    pattern:  /general/pedidos
+    pattern:  /{restaurantID}/caja/general/pedidos
     defaults: { _controller: ServinowMovimientosDeCajaBundle:General:pedidos }
     
 servinow_movimientos_de_caja_general_mesas:
-    pattern:  /general/mesas
+    pattern:  /{restaurantID}/caja/general/mesas
     defaults: { _controller: ServinowMovimientosDeCajaBundle:General:mesas }
 
 # Productos
 servinow_movimientos_de_caja_productos:
-    pattern:  /productos
+    pattern:  /{restaurantID}/caja/productos
     defaults: { _controller: ServinowMovimientosDeCajaBundle:Productos:productos }
     
 servinow_movimientos_de_caja_productos_id:
-    pattern:  /productos/{producto_id}
+    pattern:  /{restaurantID}/caja/productos/{producto_id}
     defaults: { _controller: ServinowMovimientosDeCajaBundle:Productos:productos_id }
 
 # Movimientos
 servinow_movimientos_de_caja_movimientos:
-    pattern:  /movimientos
+    pattern:  /{restaurantID}/caja/movimientos
     defaults: { _controller: ServinowMovimientosDeCajaBundle:Movimientos:movimientos }
     
 servinow_movimientos_de_caja_movimientos_fecha:
-    pattern:  /movimientos/{fecha}
+    pattern:  /{restaurantID}/caja/movimientos/{fecha}
     defaults: { _controller: ServinowMovimientosDeCajaBundle:Movimientos:movimientos_fecha }
     
