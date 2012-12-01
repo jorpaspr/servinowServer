@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class GeneralController extends Controller
 {
-    public function ingresosAction()
+    public function ingresosAction($restaurantID)
     {
         return $this->render('ServinowMovimientosDeCajaBundle:General:ingresos.html.twig',
                 array('restaurantID'=>$restaurantID));
