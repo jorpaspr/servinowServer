@@ -4,7 +4,7 @@ servinow_gestion_pedidos:
 
 servinow_navigation:
     resource: "@ServinowNavigationBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{restaurantID}/
 
 # Internal routing configuration to handle ESI
 #_internal:

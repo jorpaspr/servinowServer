@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Servinow\NavigationBundle\ServinowNavigationBundle(),
             new Servinow\GestionPedidosBundle\ServinowGestionPedidosBundle(),
+            new Servinow\EntitiesBundle\ServinowEntitiesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
