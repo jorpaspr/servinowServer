@@ -24,7 +24,7 @@ class Restaurante
     /**
      * @var integer $ultimaActualizacion
      *
-     * @ORM\Column(name="ultimaActualizacion", type="integer")
+     * @ORM\Column(name="ultimaActualizacion", type="datetime")
      */
     private $ultimaActualizacion;
 
