@@ -1,0 +1,3 @@
+servinow_platos_homepage:
+    pattern:  /
+    defaults: { _controller: ServinowPlatosBundle:Default:index }
