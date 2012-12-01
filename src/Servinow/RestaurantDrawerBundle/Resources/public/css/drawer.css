@@ -1,0 +1,82 @@
+/* 
+    Document   : drawer.css
+    Created on : 30-nov-2012, 15:48:01
+    Author     : bloodsucker
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#drawerContainer{
+	overflow: hidden;
+	width: 1400px;
+	padding: 20px;
+	margin: 0 auto;
+}
+
+#drawerCanvas {
+	background-color: red;
+	float: left;
+	width: 600px;
+	height: 400px;
+}
+
+#formDraggers{
+	float: right;
+	width: 600px;
+	border: 1px solid black;
+	padding: 20px;
+}
+
+#formDraggers > div {
+	overflow: hidden;
+	border: 1px solid black;
+	margin: 10px 0;
+	padding: 5px;
+}
+#formDraggers > div:first-child{
+	margin-top: 0px;
+}
+#formDraggers > div:last-child{
+	margin-bottom: 0px;
+}
+
+#formDraggers > div .object {
+	display: block;
+	margin-right: 2%;
+	text-align: right;
+	width: 20%;
+	float: left;
+}
+#formDraggers > div .description {
+	display: block;
+	width: 50%;
+	float: left;
+}
+
+#formDraggers > div .configRight {
+	width: 28%;
+	float: left;
+	display: block;
+}
+#formDraggers > div .configRight label {
+	overflow: hidden;
+	display: block;
+}
+#formDraggers > div .configRight label span {
+	width: 50%;
+	display: block;
+	float:left;
+}
+#formDraggers > div .configRight label input {
+	width: 45%;
+	display: block;
+	float: right;
+}
+
+#formDraggers > div .configBottom{
+	clear: both;
+}
+
+#formDraggers > div .configBottom input {
+	width: 50px;
+}
