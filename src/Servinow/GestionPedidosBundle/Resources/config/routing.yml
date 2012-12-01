@@ -1,0 +1,3 @@
+servinow_gestion_pedidos_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: ServinowGestionPedidosBundle:Default:index }
