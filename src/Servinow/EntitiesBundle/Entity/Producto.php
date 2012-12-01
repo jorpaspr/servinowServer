@@ -54,11 +54,11 @@ class Producto
     private $precio;
 
     /**
-     * @var integer $cantDisponible
+     * @var boolean $cantDisponible
      *
-     * @ORM\Column(name="cantDisponible", type="integer")
+     * @ORM\Column(name="disponible", type="boolean")
      */
-    private $cantDisponible;
+    private $disponible;
 
     /**
      * @ORM\OneToMany(targetEntity="LineaPedido", mappedBy="producto")
@@ -316,5 +316,28 @@ class Producto
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set disponible
+     *
+     * @param boolean $disponible
+     * @return Producto
+     */
+    public function setDisponible($disponible)
+    {
+        $this->disponible = $disponible;
+    
+        return $this;
+    }
+
+    /**
+     * Get disponible
+     *
+     * @return boolean 
+     */
+    public function getDisponible()
+    {
+        return $this->disponible;
     }
 }
