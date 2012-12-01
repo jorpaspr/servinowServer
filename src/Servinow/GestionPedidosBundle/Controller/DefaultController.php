@@ -6,8 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction($restaurantID)
     {
-        return $this->render('ServinowGestionPedidosBundle:Default:index.html.twig', array('name' => $name));
+        return $this->render('ServinowGestionPedidosBundle:GestionPedidos:index.html.twig', array(
+			'restaurantID' => $restaurantID
+		));
     }
 }
