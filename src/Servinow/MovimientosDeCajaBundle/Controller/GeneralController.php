@@ -8,21 +8,25 @@ class GeneralController extends Controller
 {
     public function ingresosAction()
     {
-        return $this->render('ServinowMovimientosDeCajaBundle:General:ingresos.html.twig');
+        return $this->render('ServinowMovimientosDeCajaBundle:General:ingresos.html.twig',
+                array('restaurantID'=>$restaurantID));
     }
     
-    public function pagoAction()
+    public function pagoAction($restaurantID)
     {
-        return $this->render('ServinowMovimientosDeCajaBundle:General:pago.html.twig');
+        return $this->render('ServinowMovimientosDeCajaBundle:General:pago.html.twig',
+                array('restaurantID'=>$restaurantID));
     }
     
-    public function pedidosAction()
+    public function pedidosAction($restaurantID)
     {
-        return $this->render('ServinowMovimientosDeCajaBundle:General:pedidos.html.twig');
+        return $this->render('ServinowMovimientosDeCajaBundle:General:pedidos.html.twig',
+                array('restaurantID'=>$restaurantID));
     }
     
-    public function mesasAction()
+    public function mesasAction($restaurantID)
     {
-        return $this->render('ServinowMovimientosDeCajaBundle:General:mesas.html.twig');
+        return $this->render('ServinowMovimientosDeCajaBundle:General:mesas.html.twig',
+                array('restaurantID'=>$restaurantID));
     }
 }

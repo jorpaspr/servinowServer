@@ -6,14 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MovimientosController extends Controller
 {
-    public function movimientosAction()
+    public function movimientosAction($restaurantID)
     {
-        return $this->render('ServinowMovimientosDeCajaBundle:Movimientos:movimientos.html.twig');
+        return $this->render('ServinowMovimientosDeCajaBundle:Movimientos:movimientos.html.twig',
+                array('restaurantID'=>$restaurantID));
     }
     
-    public function movimientos_fechaAction($fecha)
+    public function movimientos_fechaAction($restaurantID, $fecha)
     {
         return $this->render('ServinowMovimientosDeCajaBundle:Movimientos:movimientos_fecha.html.twig',
-                array('fecha'=> $fecha));
+                array('restaurantID'=>$restaurantID, 'fecha'=> $fecha));
     }
 }
