@@ -80,3 +80,41 @@
 #formDraggers > div .configBottom input {
 	width: 50px;
 }
+
+#formDraggers > div .object p{
+	display:table;
+	width:40px;
+	height: 40px;
+	background-color: #D0F5FF;
+	float: right;
+}
+
+#formDraggers > div .object p .title{
+	display: table-cell;
+	vertical-align: middle;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	font-size: 0.5em;
+	text-align: center;
+	border: 0 none;
+	width: 40px;
+	height: 40px;
+	background: none;
+	color: black;
+	outline: none;
+}
+
+#formDraggers > div .object p.square .title {
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+}
+
+#formDraggers > div .object p.wide .title {
+	transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+}
+
+#formDraggers > div .object p.tall .title {
+	transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+}

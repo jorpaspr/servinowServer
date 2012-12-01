@@ -4,6 +4,12 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowrestaurantdrawer/css/drawer.css') }}">
 {% endblock %}
 
+{% block javascripts %}
+<script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/drawer.js')}}" ></script>
+{% endblock %}
+
+
+
 
 {% block content %}
 <h2>{{"Personalice el espacio de su restaurante" | trans}}</h2>
@@ -12,35 +18,37 @@
 	<canvas id="drawerCanvas" width="600" height="400" ></canvas>
 
 	<div id="formDraggers" >
-		<div id="formDraggers_floor" >
+		<div id="formDraggers_floor" class="option" >
 			<div class="object" >{{"Objecto" | trans}}</div>
 			<div class="description" >{{"Coloree la forma de su restaurante." | trans}}</div>
 		</div>
-		<div id="formDraggers_object" >
-			<div class="object"><span>{{"Ventana" | trans}}</span></div>
+		<div id="formDraggers_object" class="option" >
+			<div class="object"><p class="square" style="height: 40px; width: 40px;">
+					<input style="height: 40px; width: 40px;" maxlength="8" class="title" type="text" value="{{"Ventana" | trans}}" />
+			</p></div>
 			<div class="description" >{{"Cree un componente" | trans}}</div>
 			<div class="configRight">
-				<label>
-					<span>{{"Largo" | trans}}:</span>
-					<input type="number" step="1" min="1" >
+				<label class="tall">
+					<span>{{"Alto" | trans}}:</span>
+					<input type="number" step="1" min="1" value="1" >
 				</label>
-				<label>
+				<label class="wide">
 					<span>{{"Ancho" | trans}}:</span>
-					<input type="number" step="1" min="1" >
+					<input type="number" step="1" min="1" value="1" >
 				</label>
 			</div>
 		</div>
-		<div id="formDraggers_table" >
-			<div class="object"><span>{{"Mesa" | trans}}</span></div>
+		<div id="formDraggers_table" class="option" >
+			<div class="object"><p><span class="title">{{"Mesa" | trans}}</span></p></div>
 			<div class="description" >{{"Cree una mesa" | trans}}</div>
 			<div class="configRight">
-				<label>
-					<span>{{"Largo" | trans}}:</span>
-					<input type="number" step="1" min="1" >
+				<label class="tall">
+					<span>{{"Alto" | trans}}:</span>
+					<input type="number" step="1" min="1" value="1" >
 				</label>
-				<label>
+				<label class="wide" >
 					<span>{{"Ancho" | trans}}:</span>
-					<input type="number" step="1" min="1" >
+					<input type="number" step="1" min="1" value="1" >
 				</label>
 			</div>
 			<div class="configBottom">
