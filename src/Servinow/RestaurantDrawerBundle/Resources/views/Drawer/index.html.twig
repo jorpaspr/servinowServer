@@ -1,21 +1,22 @@
 {% extends 'ServinowNavigationBundle:Navigation:index.html.twig' %}
 
 {% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowrestaurantdrawer/css/ui-lightness/jquery-ui-1.9.2.custom.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowrestaurantdrawer/css/drawer.css') }}">
 {% endblock %}
 
 {% block javascripts %}
+<script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/jquery-ui-1.9.2.custom.min.js')}}" ></script>
 <script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/drawer.js')}}" ></script>
 {% endblock %}
-
-
-
 
 {% block content %}
 <h2>{{"Personalice el espacio de su restaurante" | trans}}</h2>
 
 <div id="drawerContainer">
-	<canvas id="drawerCanvas" width="600" height="400" ></canvas>
+	<div id="drawerCanvasContainer" >
+		<canvas id="drawerCanvas" width="600" height="400" ></canvas>
+	</div>
 
 	<div id="formDraggers" >
 		<div id="formDraggers_floor" class="option" >
@@ -23,9 +24,10 @@
 			<div class="description" >{{"Coloree la forma de su restaurante." | trans}}</div>
 		</div>
 		<div id="formDraggers_object" class="option" >
-			<div class="object"><p class="square" style="height: 40px; width: 40px;">
-					<input style="height: 40px; width: 40px;" maxlength="8" class="title" type="text" value="{{"Ventana" | trans}}" />
-			</p></div>
+			<div class="object">
+				<p class="square objectElement">
+					<input maxlength="8" class="title" type="text" value="{{"Ventana" | trans}}" />
+				</p></div>
 			<div class="description" >{{"Cree un componente" | trans}}</div>
 			<div class="configRight">
 				<label class="tall">
@@ -39,7 +41,9 @@
 			</div>
 		</div>
 		<div id="formDraggers_table" class="option" >
-			<div class="object"><p><span class="title">{{"Mesa" | trans}}</span></p></div>
+			<div class="object">
+				<p class="objectElement"><span class="title">{{"Mesa" | trans}}</span></p>
+			</div>
 			<div class="description" >{{"Cree una mesa" | trans}}</div>
 			<div class="configRight">
 				<label class="tall">

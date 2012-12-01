@@ -59,6 +59,25 @@ $(function(){
 				obEl.removeClass('square wide').addClass('tall');
 			}
 		});
+		
+		$( "#formDraggers_object .object > p" ).draggable({
+			helper: "clone"
+			,scroll: false
+			,containment: $('#drawerCanvasContainer')
+			,grid : [colWidth, rowHeight]
+			,stop : function(e, ui){
+				var helper = ui.helper.clone(true);
+				var cont = $('#drawerCanvasContainer');
+				var contCoor = cont.offset();
+				
+				var posTop = ui.offset.top - contCoor.top;
+				var posLeft = ui.offset.left - contCoor.left;
+				
+				helper.appendTo(cont);
+				
+				console.log("top:"+posTop+"; left:"+posLeft);
+			}
+		});
 	}
 	
 	var canvas = $('#drawerCanvas');

@@ -13,9 +13,14 @@
 	margin: 0 auto;
 }
 
-#drawerCanvas {
-	background-color: red;
+#drawerCanvasContainer{
 	float: left;
+	overflow: hidden;
+	width: 600px;
+	height: 400px;
+}
+
+#drawerCanvas {
 	width: 600px;
 	height: 400px;
 }
@@ -81,7 +86,7 @@
 	width: 50px;
 }
 
-#formDraggers > div .object p{
+.objectElement{
 	display:table;
 	width:40px;
 	height: 40px;
@@ -89,7 +94,7 @@
 	float: right;
 }
 
-#formDraggers > div .object p .title{
+.objectElement .title{
 	display: table-cell;
 	vertical-align: middle;
 	transform: rotate(-45deg);
@@ -104,17 +109,17 @@
 	outline: none;
 }
 
-#formDraggers > div .object p.square .title {
+.objectElement.square .title {
 	transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg);
 }
 
-#formDraggers > div .object p.wide .title {
+.objectElement.wide .title {
 	transform: rotate(0deg);
 	-webkit-transform: rotate(0deg);
 }
 
-#formDraggers > div .object p.tall .title {
+.objectElement.tall .title {
 	transform: rotate(-90deg);
 	-webkit-transform: rotate(-90deg);
 }
