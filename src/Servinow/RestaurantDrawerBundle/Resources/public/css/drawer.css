@@ -16,13 +16,21 @@
 #drawerCanvasContainer{
 	float: left;
 	overflow: hidden;
-	width: 600px;
-	height: 400px;
+	width: 610px;
+	height: 410px;
+	position: relative;
 }
 
 #drawerCanvas {
 	width: 600px;
 	height: 400px;
+	position: relative;
+	top: 5px;
+	left: 5px;
+}
+
+#drawerKnowledge, #exampleObject{
+	display: none;
 }
 
 #formDraggers{
@@ -92,6 +100,11 @@
 	height: 40px;
 	background-color: #D0F5FF;
 	float: right;
+	position: absolute;
+}
+
+#formDraggers .objectElement{
+	position: relative;
 }
 
 .objectElement .title{
@@ -112,6 +125,7 @@
 .objectElement.square .title {
 	transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg);
+	z-index: 3;
 }
 
 .objectElement.wide .title {
@@ -122,4 +136,47 @@
 .objectElement.tall .title {
 	transform: rotate(-90deg);
 	-webkit-transform: rotate(-90deg);
+}
+
+.objectElement .handler{
+	position: absolute;
+	top: 0px;
+	left:0px;
+	background-color: #343434;
+	z-index: 5;
+	cursor: pointer;
+	line-height: 0.8em;
+	font-size: 0.8em;
+	width: 0.8em;
+	height: 0.8em;
+	text-align: center;
+}
+
+.objectElement.ui-draggable-dragging .handler {
+	cursor: move;
+}
+.objectElement .removeHandler {
+	display: none;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: #C21F00;
+	z-index: 5;
+	cursor: pointer;
+	line-height: 0.8em;
+	font-size: 0.8em;
+	width: 0.8em;
+	height: 0.8em;
+	text-align: center;
+}
+
+.objectElement:hover .removeHandler {
+	display: block;
+}
+
+#confirmDraw{
+	float: left;
+}
+#cancelDraw{
+	float: right;
 }

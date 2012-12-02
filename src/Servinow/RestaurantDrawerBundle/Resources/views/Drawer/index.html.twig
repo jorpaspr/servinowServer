@@ -7,7 +7,8 @@
 
 {% block javascripts %}
 <script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/jquery-ui-1.9.2.custom.min.js')}}" ></script>
-<script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/drawer.js')}}" ></script>
+<script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/Drawer.js')}}" ></script>
+<script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/drawerExec.js')}}" ></script>
 {% endblock %}
 
 {% block content %}
@@ -16,6 +17,14 @@
 <div id="drawerContainer">
 	<div id="drawerCanvasContainer" >
 		<canvas id="drawerCanvas" width="600" height="400" ></canvas>
+		<div id="drawerKnowledge" >{{ drawerKnowledge }}</div>
+		<div id="exampleObject" >
+			<p class="objectElement">
+				<span class="handler" >+</span>
+				<span class="removeHandler">-</span>
+				<input class="title" maxlength="8" type="text" />
+			</p>
+		</div>
 	</div>
 
 	<div id="formDraggers" >
@@ -25,9 +34,11 @@
 		</div>
 		<div id="formDraggers_object" class="option" >
 			<div class="object">
-				<p class="square objectElement">
+				<p class="square objectElement isGeneric">
+					<span class="handler" >+</span>
 					<input maxlength="8" class="title" type="text" value="{{"Ventana" | trans}}" />
-				</p></div>
+				</p>
+			</div>
 			<div class="description" >{{"Cree un componente" | trans}}</div>
 			<div class="configRight">
 				<label class="tall">
@@ -66,6 +77,10 @@
 					<input type="number" step="1" min="1">
 				</label>
 			</div>
+		</div>
+		<div>
+			<button id="confirmDraw">{{"Confirmar nueva organización" | trans}}</button>
+			<button id="cancelDraw" >{{"Cancelar" | trans}}</button>
 		</div>
 	</div>
 </div>
