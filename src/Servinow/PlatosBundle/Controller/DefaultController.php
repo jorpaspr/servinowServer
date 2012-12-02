@@ -8,6 +8,17 @@ class DefaultController extends Controller
 {
     public function indexAction($restaurantId)
     {
-        return $this->render('ServinowPlatosBundle:Default:index.html.twig', array('name' => 'plato'));
+        $producto = new \Servinow\EntitiesBundle\Entity\Producto();
+        $formulario = $this->createFormBuilder($producto)
+                ->add('nombre', 'entity', array(
+                    'class' => 'Servinow\\EntitiesBundle\\Entity\\Producto',
+                    'property' => 'nombre',
+                    'expanded' => false,
+                    'multiple' => false
+                    ))
+                ->getForm();
+        return $this->render('ServinowPlatosBundle:Default:index.html.twig',
+                array('formulario' => $formulario->createView()
+                ));
     }
 }
