@@ -6,11 +6,25 @@
 
 {% block content %}
 
+<form method="post" action="{{ path('servinow_platos_homepage_decidir', {'restaurantID': 1 }) }}">
+    <select id="listadoPlatos" size="10">
+    {% for plato in platos %}
+            <option value="{{plato.id}}" >{{plato.nombre}}</option>
+    {% endfor %}
+    </select>
+        
+        <button type="submit" name="action" value="editar">Editar</button>
+        <button type="submit" name="action" value="eliminar">Eliminar</button>
+ </form>
+{#
 <form method="post" action="plato_parser.php">
     <div style="float:left">
-    {{ form_widget(formulario) }}
-    </div>
-    <p><input type="submit" value="Nuevo" name="nuevo" /><input type="submit" value="Modificar" name="modificar" /><input type="submit" value="Eliminar" name="eliminar" /></p>
+        {{ form_widget(formulario) }}
+     </div>
+     <p><input type="submit" value="Nuevo" name="nuevo" /><input type="submit" value="Modificar" name="modificar" /><input type="submit" value="Eliminar" name="eliminar" /></p>
 </form>
+ #}
 
 {% endblock %}
+
+

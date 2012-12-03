@@ -1,0 +1,16 @@
+{% extends 'ServinowNavigationBundle:Navigation:index.html.twig' %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block content %}
+<b>HOLA</b>
+<form method="post" action="plato_parser.php">
+    <div style="float:left">
+    {{ form_widget(formulario) }}
+    </div>
+    <p><input type="submit" value="Nuevo" name="nuevo" /><input type="submit" value="Modificar" name="modificar" /><input type="submit" value="Eliminar" name="eliminar" /></p>
+</form>
+
+{% endblock %}

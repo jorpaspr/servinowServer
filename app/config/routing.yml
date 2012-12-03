@@ -1,6 +1,6 @@
 servinow_platos:
     resource: "@ServinowPlatosBundle/Resources/config/routing.yml"
-    prefix:   /{restaurantId}/platos/
+    prefix:   /{restaurantID}/platos/
 
 servinow_navigation:
     resource: "@ServinowNavigationBundle/Resources/config/routing.yml"
