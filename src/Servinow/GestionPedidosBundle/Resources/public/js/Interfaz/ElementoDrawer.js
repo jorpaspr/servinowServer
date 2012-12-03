@@ -1,55 +1,11 @@
 (function(ep){
-	var elements = {};
-        var VISTA_PEDIDO = 0;
-        var getElementGraphic = function(panel, estado, vista, pedido, lineaPedido){
-            var element = getElement(panel, estado, vista, pedido, lineaPedido);
-            return element.element;
-        }
-        var addElementGraphic = function(elementGraphic, panel, estado, vista, pedido, lineaPedido){
-            var element = getElement(panel, estado, vista, pedido, lineaPedido);
-            element = {};
-            element.element = elementGraphic;
-        }
-        var removeElement = function(panel, estado, vista, pedido, lineaPedido){
-             var element = getElement(panel, estado, vista, pedido, lineaPedido);
-             element = null;            
-        }
-        var getElement =  function(panel, estado, vista, pedido, lineaPedido){
-            var result;
-            if(panel != null){
-                if(elements["panel"+panel.tipo] == null) elements["panel"+panel.tipo] = {};
-                result = elements["panel"+panel.tipo];
-                if(estado != null){
-                    if(result.estados["estado"+estado.tipo] == null) result.estados["estado"+estado.tipo] = {};
-                    result = result.estados["estado"+estado.tipo];
-                    if(vista == VISTA_PEDIDO) {
-                        if(result.vistaPedidos == null) result.vistaPedidos = {};
-                        result = result.vistaPedidos;
-                        if(pedido != null){
-                            if(result.pedidos["pedido"+pedido.id] == null) result.pedidos["pedido"+pedido.id] = {};
-                            result = result.pedidos["pedido"+pedido.id];
-                            if(lineaPedido != null){
-                                if(result.productos["producto"+lineaPedido.producto.id] == null) result.productos["producto"+lineaPedido.producto.id] = {};
-                                result = result.productos["producto"+lineaPedido.producto.id];
-                            }
-                        }
-                    }
-                }
-            }
-                    
-            return result;
-        }
+	var elements = new ep.Interfaz.ElementoGraphicTree();
 	ep.Interfaz.ElementoDrawer = function(){
 		this.drawPanelCocinero = function(elementParent, panel){
-			elements["panel"+panel.tipo] = {};
-			elements["panel"+panel.tipo].estados = {};
-			elements["panel"+panel.tipo].pedidos = {};
-			elements["panel"+panel.tipo].productos = {};
-			
 			var panelElementGraphic = new ep.Interfaz.Entidad.PanelElementoGrafico();
 			panelElementGraphic.create(panel);
 			
-			elements["panel"+panel.tipo].element = panelElementGraphic;
+			elements.newPanelElement(panelElementGraphic, panel);
 			
 			for(var i = 0; i < panel.estados.length; ++i){
 				this.drawEstado(panel, panel.estados[i]);
@@ -66,10 +22,9 @@
 			var estadoElementGraphic = new ep.Interfaz.Entidad.EstadoElementoGrafico();
 			estadoElementGraphic.create(estado, estado.botonera);
 			
-			elements["panel"+panel.tipo].estados["estado"+estado.tipo] = {};		
-			elements["panel"+panel.tipo].estados["estado"+estado.tipo].element = estadoElementGraphic;
+                        elements.newEstadoElement(estadoElementGraphic, panel, estado);
 			
-			var panelElementGraphic = elements["panel"+panel.tipo].element;
+			var panelElementGraphic = elements.getPanelElement(panel).element;
 			
 			panelElementGraphic.addEstado(estadoElementGraphic);
 			
@@ -78,12 +33,10 @@
 		this.drawVistaProductosAgrupadosPedidos = function (panel, estado){
 			var vistaPedidosElementGraphic = new ep.Interfaz.Entidad.ProductosAgrupadosPedidosElementoGrafico();
 			vistaPedidosElementGraphic.create();
+                        
+                        elements.newVistaPedidosElement(vistaPedidosElementGraphic, panel, estado);
 			
-			elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos = {};
-			elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos = {};
-			elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.element = vistaPedidosElementGraphic;
-			
-			var estadoElementGraphic = elements["panel"+panel.tipo].estados["estado"+estado.tipo].element;
+			var estadoElementGraphic = elements.getEstadoElement(panel, estado).element;
 			estadoElementGraphic.addVistaProductosAgrupadosPedidos(vistaPedidosElementGraphic);
 		}
 		this.drawPedidos = function(panel, pedidos){
@@ -101,46 +54,42 @@
 			}
 		}
                 this.drawPedidoEnEstado = function(panel, pedido, estado){
-                     var pedidoExist = elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos["pedido"+pedido.id];
+                     var pedidoExist = elements.getPedidoElement(panel, estado, pedido);
                      if(pedidoExist == null){
 			var pedidoElementGraphic = new ep.Interfaz.Entidad.PedidoElementoGrafico();
 			pedidoElementGraphic.create(pedido);
 					
-			elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos["pedido"+pedido.id] = {};					
-			elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos["pedido"+pedido.id].productos = {};
-			elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos["pedido"+pedido.id].element = pedidoElementGraphic;
+			elements.newPedidoElement(pedidoElementGraphic, panel, estado, pedido);
 					
-			var vistaPedidosElementoGrafico = elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.element;
+			var vistaPedidosElementoGrafico = elements.getVistaPedidosElement(panel, estado).element;
 				
 			vistaPedidosElementoGrafico.addPedido(pedidoElementGraphic);
                     }
                     
                 }
 		this.drawLineaPedido = function(panel, pedido, lineaPedido){
-			var productoElementGraphic = new ep.Interfaz.Entidad.ProductoElementoGrafico();
-			productoElementGraphic.create(lineaPedido);
-			
 			var estado = lineaPedido.estado;
                         
-			var pedidoElementGraphic = elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos["pedido"+pedido.id].element;
-			
-                        var existeLineaPedido = elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos["pedido"+pedido.id].productos["producto"+lineaPedido.producto.id];
+                        var existeLineaPedido = elements.getLineaPedidoElement(panel, estado, pedido, lineaPedido);
                         if(existeLineaPedido == null){
-                            elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos["pedido"+pedido.id].productos["producto"+lineaPedido.producto.id] = {};
-                            elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos["pedido"+pedido.id].productos["producto"+lineaPedido.producto.id].element = productoElementGraphic;
-                        
+                            var productoElementGraphic = new ep.Interfaz.Entidad.ProductoElementoGrafico();
+                            productoElementGraphic.create(lineaPedido);
+                            
+                            elements.newLineaPedidoElement(productoElementGraphic, panel, estado, pedido, lineaPedido);
+                            
+                            var pedidoElementGraphic = elements.getPedidoElement(panel, estado, pedido).element;                        
                             pedidoElementGraphic.addProducto(productoElementGraphic);
                         }
 		}
                 this.drawUpdatedEstadoLineaPedido = function(panel, pedido, lineaPedido, estado){
                     this.drawPedidoEnEstado(panel, pedido, lineaPedido.estado);
                     
-                    var productoElementGraphic = getElementGraphic(panel, estado, VISTA_PEDIDO, pedido, lineaPedido);
-                    removeElement(panel, estado, VISTA_PEDIDO, pedido, lineaPedido);
+                    var productoElementGraphic = elements.getLineaPedidoElement(panel, estado, pedido, lineaPedido).element;
+                    elements.deleteLineaPedidoElement(panel, estado, pedido, lineaPedido);
                     
-                    addElementGraphic(productoElementGraphic, panel, lineaPedido.estado, VISTA_PEDIDO, pedido, lineaPedido);
+                    elements.newLineaPedidoElement(productoElementGraphic, panel, lineaPedido.estado, pedido, lineaPedido);
 
-                    var pedidoElementGraphic =  getElementGraphic(panel, estado, VISTA_PEDIDO, pedido);
+                    var pedidoElementGraphic =  elements.getPedidoElement(panel, lineaPedido.estado, pedido).element;
                     
                     pedidoElementGraphic.addProducto(productoElementGraphic);
                 }
