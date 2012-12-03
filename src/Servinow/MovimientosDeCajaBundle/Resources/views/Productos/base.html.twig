@@ -1,0 +1,59 @@
+{% extends 'ServinowMovimientosDeCajaBundle::base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/productos.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/buttons.css') }}">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+{% endblock %}
+    
+{% block javascripts_end_body %}
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( "#datepicker_fecha_inicio" ).datepicker();
+            $( "#datepicker_fecha_fin" ).datepicker();
+        });
+    </script>
+    <script src="https://raw.github.com/DmitryBaranovskiy/raphael/master/raphael-min.js"></script>
+    <script src="{{ asset('bundles/servinowmovimientosdecaja/js/productos.js') }}"></script>
+{% endblock %}
+
+{% block class_li_productos %} class="selected" {%endblock%}
+
+{% block central_movimientos_caja %}
+<div id="nav_movimientos_caja_productos">
+    <h1 id="titulo_movimientos_caja_productos">
+        {% trans %}products {%endtrans%}
+    </h1>
+    <div id="nav_movimientos_caja_productos_container">
+            <p>
+                Fecha inicio: 
+                <input type="text" id="datepicker_fecha_inicio" />
+            </p>
+
+            <p>
+                Fecha fin: 
+                <input type="text" id="datepicker_fecha_fin" />
+            </p>
+            
+            <form class="formulario_buscar">
+                <input type="text" name="producto" id="buscar_producto" 
+                       placeholder="{%trans%}enter.product{%endtrans%}">
+                <button type="submit" class="btn button_buscar"
+                <button type="submit" class="">{%trans%}search{%endtrans%}</button>
+            </form>
+            <a href="{{path('servinow_movimientos_de_caja_productos', 
+                {'restaurantID': restaurantID})}}"
+               class="btn a_button"
+            >
+                {%trans%}top10{%endtrans%}
+            </a>
+    </div>
+</div>
+
+<div id="central_movimientos_caja_productos">
+    {%block central_movimientos_caja_productos%}
+    {%endblock%}
+</div>
+{% endblock %}

@@ -22,9 +22,9 @@ class Pedido
     private $id;
 
     /**
-     * @var \DateTime $fecha
+     * @var integer $fecha
      *
-     * @ORM\Column(name="fecha", type="datetime")
+     * @ORM\Column(name="fecha", type="integer")
      */
     private $fecha;
 
@@ -72,7 +72,7 @@ class Pedido
     /**
      * Set fecha
      *
-     * @param \DateTime $fecha
+     * @param integer $fecha
      * @return Pedido
      */
     public function setFecha($fecha)
@@ -85,7 +85,7 @@ class Pedido
     /**
      * Get fecha
      *
-     * @return \DateTime 
+     * @return integer 
      */
     public function getFecha()
     {

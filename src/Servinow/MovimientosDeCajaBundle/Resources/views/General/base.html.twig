@@ -1,0 +1,83 @@
+{% extends 'ServinowMovimientosDeCajaBundle::base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/general.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/buttons.css') }}">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( "#datepicker_fecha_inicio" ).datepicker();
+            $( "#datepicker_fecha_fin" ).datepicker();
+        });
+    </script>
+{% endblock %}
+
+{% block class_li_general %} class="selected" {%endblock%}
+
+{% block central_movimientos_caja %}
+<div id="sidebar_left">
+    <h1 id="titulo_movimientos_caja_general">
+        {%trans%}overview{%endtrans%}
+    </h1>
+    <ul id="buttons_ul_movimientos_caja_general">
+        <li>
+            <a href="{{path('servinow_movimientos_de_caja_general_pago', 
+                {'restaurantID': restaurantID})}}"
+               class="btn .btn-large a_button"
+            >
+                {%trans%}payment.methods{%endtrans%}
+            </a>
+        </li>
+        <li>
+            <a href="{{path('servinow_movimientos_de_caja_general_ingresos', 
+                {'restaurantID': restaurantID})}}"
+               class="btn .btn-large a_button"
+            >
+                {%trans%}income{%endtrans%}
+            </a>
+        </li>
+        <li>
+            <a href="{{path('servinow_movimientos_de_caja_general_pedidos', 
+                {'restaurantID': restaurantID})}}"
+               class="btn .btn-large a_button"
+            >
+                {%trans%}orders{%endtrans%}
+            </a>
+        </li>
+        <li>
+            <a href="{{path('servinow_movimientos_de_caja_general_mesas', 
+                {'restaurantID': restaurantID})}}"
+               class="btn .btn-large a_button"
+            >
+                {%trans%}tables{%endtrans%}
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="central_sidebar">
+    <div id="nav_movimientos_caja_general">
+        <div id="nav_movimientos_caja_general_container">
+            <p>
+                Fecha inicio: 
+                <input type="text" id="datepicker_fecha_inicio" />
+            </p>
+
+            <p>
+                Fecha fin: 
+                <input type="text" id="datepicker_fecha_fin" />
+            </p>
+        </div>
+    </div>
+    <div id="central_movimientos_caja_general">
+    {% block central_movimientos_caja_general%}
+        
+    {% endblock %}
+    </div>
+</div>
+
+{% endblock %}
