@@ -54,7 +54,7 @@ class DefaultController extends Controller
         ); //TODO
         
         return $this->render('ServinowPlatosBundle:Default:editar.html.twig',
-                array('restaurandID' => $restaurantID,
+                array('restaurantID' => $restaurantID,
                     'platoID' => $plato));
     }
 }
