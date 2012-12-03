@@ -20,6 +20,8 @@ ep.Constant.CAMARERO = 1;
 ep.Constant.PLATO = 0;
 ep.Constant.BEBIDA = 0;
 
+ep.Constant.EVENT_NEXT_STATE = 0;
+
 
 var template = {}
 template.PANEL = "/gywemServinowServer/web/bundles/servinowgestionpedidos/Templates/PanelTemplate.html.ejs";
@@ -32,6 +34,16 @@ $(document).ready(function() {
 	// Comprobar si el usuario es un camarero o cocinero
 
 	var im = new ep.Interfaz.InterfazManager();
+        var em = new ep.Manejador.EventManager();
+        
+        em.addEvent(ep.Constant.EVENT_NEXT_STATE, function(e){
+            e.stopPropagation();
+            var lineaPedido = $(this).parents(".lineaPedido").data("obj");
+            var pedido = $(this).parents(".pedido").data("obj");
+            var panel = $(this).parents(".panel").data("obj");
+            
+            im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, ep.Constant.ESTADO_COCINA);
+        });
         
         var producto1 = {
         	id: 1,
@@ -78,6 +90,7 @@ $(document).ready(function() {
 
 	var panel = im.cargarPanelCocinero($('#content'));
 	im.drawNewPedidos(panel, pedidos);
+        
 	// o	
 	//im.cargarPanelCamaero();
 	

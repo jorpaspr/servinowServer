@@ -2,13 +2,13 @@
 	var template = template.PANEL;
 	ep.Interfaz.Entidad.PanelElementoGrafico = function() {
 		this.element = null;
-		this.create = function(tipo){
+		this.create = function(panel){
 			var data = {
-				panel: {
-					tipo: tipo
-				}
+				panel: panel
 			};
 			this.element = $(new EJS({url: template}).render(data));
+                        
+                        this.element.data("obj", panel);
 
 			return this;
 		}

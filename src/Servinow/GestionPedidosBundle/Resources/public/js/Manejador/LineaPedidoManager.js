@@ -11,5 +11,8 @@
 			
 			return lineaPedido;
 		}
+                this.updateEstado = function(lineaPedido, estado){
+                        lineaPedido.estado = estado;
+                }
 	}
 })(ep);

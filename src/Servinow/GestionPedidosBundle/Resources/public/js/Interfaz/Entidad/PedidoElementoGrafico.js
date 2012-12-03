@@ -8,6 +8,7 @@
 			};
 			this.element = $(new EJS({url: template}).render(data));
 			this.listaProductos = this.element.find('.listaProductos');
+                        this.element.data("obj", pedido);
 			return this;
 		}
 		this.addProducto = function(productoElementGraphic){

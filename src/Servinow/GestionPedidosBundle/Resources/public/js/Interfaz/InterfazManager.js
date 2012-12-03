@@ -58,6 +58,21 @@
 			
 			return lineaPedidoObj;
 		}
+                this.drawUpdateEstadoLineaPedido = function(panel, pedido, lineaPedido, estado){
+                    var elementDrawer = new ep.Interfaz.ElementoDrawer();
+                    
+                    var estadoAnterior = lineaPedido.estado;
+                    
+                    var estadoObj = this.addEstado(estado);
+                    this.updateEstadoLineaPedido(lineaPedido, estadoObj);
+                    
+                    elementDrawer.drawUpdatedEstadoLineaPedido(panel, pedido, lineaPedido, estadoAnterior);                
+                }
+                this.updateEstadoLineaPedido = function(lineaPedido, estado){
+                        var lineaPedidoManager = new ep.Manejador.LineaPedidoManager();
+                        
+                        lineaPedidoManager.updateEstado(lineaPedido, estado);                    
+                }
 		this.addEstado = function(tipo){
 			switch(tipo){
 				case ep.Constant.ESTADO_COLA:
