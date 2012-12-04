@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class PlatoRepository extends EntityRepository
 {
+     public function findPlatosbyRestaurant($restauranteId){
+        return $this->getEntityManager()->getRepository("ServinowEntitiesBundle:Plato")
+                ->findBy(array('restaurante'=>$restauranteId));
+    }
+    
+    public function deletePlatobyID($platoId){
+        $em = $this->getEntityManager();
+        
+        $plato = $em->getRepository("ServinowEntitiesBundle:Plato")
+                ->find($platoId);
+        
+        $em->remove($plato);
+        $em->flush();
+    }
 }
