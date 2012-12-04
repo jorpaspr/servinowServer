@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductoRepository extends EntityRepository
 {
+    public function findProductoId($restauranteId, $productoId){
+        $producto = $this->getEntityManager()->getRepository("ServinowEntitiesBundle:Producto")
+                ->findOneBy(array('id'=>$productoId, 'restaurante'=>$restauranteId));
+        return $producto;
+    }
+    
 }

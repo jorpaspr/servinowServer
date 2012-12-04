@@ -7,12 +7,12 @@
 {% block content %}
 
 <form method="post" action="{{ path('servinow_platos_homepage_decidir', {'restaurantID': 1 }) }}">
-    <select id="listadoPlatos" size="10">
+    <select id="listadoPlatos" name='platoID' size="10" style="float:left">
     {% for plato in platos %}
             <option value="{{plato.id}}" >{{plato.nombre}}</option>
     {% endfor %}
     </select>
-        
+        <button type="submit" name="action" value="nuevo">Nuevo</button>
         <button type="submit" name="action" value="editar">Editar</button>
         <button type="submit" name="action" value="eliminar">Eliminar</button>
  </form>
