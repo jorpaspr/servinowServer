@@ -3,6 +3,7 @@
 	ep.Interfaz.Entidad.ProductoElementoGrafico = function() {
 		this.element = null;
 		this.create = function(lineaPedido){
+			this.lineaPedido = lineaPedido;
 			var data = {
 				lineaPedido: lineaPedido
 			};

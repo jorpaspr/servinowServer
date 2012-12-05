@@ -24,11 +24,11 @@ ep.Constant.EVENT_NEXT_STATE = 0;
 
 
 var template = {}
-template.PANEL = "/gywemServinowServer/web/bundles/servinowgestionpedidos/Templates/PanelTemplate.html.ejs";
-template.ESTADO = "/gywemServinowServer/web/bundles/servinowgestionpedidos/Templates/EstadoTemplate.html.ejs";
-template.PEDIDO = "/gywemServinowServer/web/bundles/servinowgestionpedidos/Templates/PedidoTemplate.html.ejs";
-template.PRODUCTO = "/gywemServinowServer/web/bundles/servinowgestionpedidos/Templates/ProductoFilaTemplate.html.ejs";
-template.PRODUCTOSAGRUPADOSPEDIDOS = "/gywemServinowServer/web/bundles/servinowgestionpedidos/Templates/ProductosAgrupadosPedidosTemplate.html.ejs";
+template.PANEL = "../../../bundles/servinowgestionpedidos/Templates/PanelTemplate.html.ejs";
+template.ESTADO = "../../../bundles/servinowgestionpedidos/Templates/EstadoTemplate.html.ejs";
+template.PEDIDO = "../../../bundles/servinowgestionpedidos/Templates/PedidoTemplate.html.ejs";
+template.PRODUCTO = "../../../bundles/servinowgestionpedidos/Templates/ProductoFilaTemplate.html.ejs";
+template.PRODUCTOSAGRUPADOSPEDIDOS = "../../../bundles/servinowgestionpedidos/Templates/ProductosAgrupadosPedidosTemplate.html.ejs";
 
 $(document).ready(function() {
 	// Comprobar si el usuario es un camarero o cocinero
@@ -42,7 +42,7 @@ $(document).ready(function() {
             var pedido = $(this).parents(".pedido").data("obj");
             var panel = $(this).parents(".panel").data("obj");
             
-            im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, ep.Constant.ESTADO_COCINA);
+            im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, lineaPedido.estado.tipo+1);
         });
         
         var producto1 = {
