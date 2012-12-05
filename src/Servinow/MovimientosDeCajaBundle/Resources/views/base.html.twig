@@ -1,0 +1,41 @@
+{% extends 'ServinowNavigationBundle::Navigation/index.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/base.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <h1 id="titulo_movimientos_caja">{% trans %}cash.movements{% endtrans %}</h1>
+
+    <div id="nav_movimientos_caja">
+        <ul id="nav_ul_movimientos_caja">
+            <li {% block class_li_general %}{%endblock%} >
+                <a href="{{ path('servinow_movimientos_de_caja_general', 
+                    {'restaurantID': restaurantID}) }}" class="">
+                    {% trans %}overview{% endtrans %}
+                </a>
+            </li>
+            <li {% block class_li_productos %} {%endblock%} >
+                <a href="{{ path('servinow_movimientos_de_caja_productos', 
+                    {'restaurantID': restaurantID}) }}" class="">
+                    {% trans %}products{% endtrans %}
+                </a>
+            </li>
+            <li {% block class_li_movimientos %} {%endblock%} >
+                <a href="{{ path('servinow_movimientos_de_caja_movimientos', 
+                    {'restaurantID': restaurantID}) }}" class="">
+                    {% trans %}daily.summary{% endtrans %}
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <div id="central_movimientos_caja">
+        {% block central_movimientos_caja %}
+        {% endblock %}
+    </div>
+
+{% endblock %}
+
+

@@ -1,0 +1,95 @@
+/* 
+    Document   : productos
+    Created on : 01-dic-2012, 19:57:49
+    Author     : escrichov
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#nav_movimientos_caja_productos{
+    position: relative;
+    float: left;
+    background-color: #E0E0E0;
+    width: 1300px;
+    height: 70px;
+}
+
+#nav_movimientos_caja_productos_container{
+    margin: 22px;
+}
+
+#central_movimientos_caja_productos{
+    position: relative;
+    float: left;
+    background-color: #F9F9F9;
+    width: 1300px;
+    min-height: 410px;
+    height: auto;
+}
+
+#titulo_movimientos_caja_productos{
+    float:left;
+    margin: 15px 0;
+    margin-left: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    line-height: 40px;
+    color: inherit;
+    font-size: 38.5px;
+    text-rendering: optimizelegibility;
+}
+
+#nav_movimientos_caja_productos p{
+    float: left;
+    margin-left: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 17px;
+}
+
+#nav_movimientos_caja_productos p:first-child{
+    margin-left: 40px;
+}
+
+
+#nav_movimientos_caja_productos p > input{
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    font-weight: normal;
+    height: 25px;
+}
+
+.a_button{
+    float:left;
+    color: #0088cc;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: sans-serif;
+    font-weight: bold;
+    width: 70px;
+    height: 20px;
+    text-align: center;
+    margin-left: 25px;
+}
+
+#buscar_producto{
+    float: left;
+    height: 25px;
+}
+
+.button_buscar{
+    float: left;
+    color: #0088cc;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: sans-serif;
+    font-weight: bold;
+    height: 30px;
+    text-align: center;
+    margin-left: 0;
+}
+.formulario_buscar{
+    float:left;
+    margin-left: 25px;
+}
