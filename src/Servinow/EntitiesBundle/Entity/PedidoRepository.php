@@ -56,4 +56,51 @@ class PedidoRepository extends EntityRepository
                 ->groupBy('ped.fecha');
         return $qb->getQuery()->getResult();
     }
+    
+    public function findPedidosMovimientos($fecha, $restaurante){
+        $em = $this->getEntityManager();
+        $qb = $em->getRepository('ServinowEntitiesBundle:Pedido')->createQueryBuilder('ped');
+        $pedidos = $qb->select('ped.id','m.id AS mesa','SUM(l.cantidad) AS productos', 
+                'ped.metodoPago', 'SUM(l.cantidad * pro.precio) AS total')
+                ->where(
+                $qb->expr()->andX(
+                        $qb->expr()->eq('ped.fecha', $fecha),
+                        $qb->expr()->eq('ped.restaurante', $restaurante),
+                        $qb->expr()->eq('ped.pagado', true)
+                ))->leftJoin('ped.lineasPedido', 'l')
+                ->leftJoin('l.producto', 'pro')
+                ->leftJoin('ped.mesa', 'm')
+                ->groupBy('ped.id');
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function findBalance($fecha, $restaurante){
+        $em = $this->getEntityManager();
+        $qb = $em->getRepository('ServinowEntitiesBundle:Pedido')->createQueryBuilder('ped');
+        $pedidos = $qb->select('SUM(l.cantidad * pro.precio) AS total')
+                ->where(
+                $qb->expr()->andX(
+                        $qb->expr()->eq('ped.fecha', $fecha),
+                        $qb->expr()->eq('ped.restaurante', $restaurante),
+                        $qb->expr()->eq('ped.pagado', true)
+                ))->leftJoin('ped.lineasPedido', 'l')
+                ->leftJoin('l.producto', 'pro');
+        return $qb->getQuery()->getSingleResult();
+    }
+    
+    public function totalPedidosCantidadIngresos($fecha_inicio, $fecha_fin, $restaurante){
+        $em = $this->getEntityManager();
+        $qb = $em->getRepository('ServinowEntitiesBundle:Pedido')->createQueryBuilder('ped');
+        $pedidos = $qb->select('COUNT(ped.id) AS pedidos', 
+                'SUM(l.cantidad * pro.precio) AS ingresos')
+                ->where(
+                $qb->expr()->andX(
+                        $qb->expr()->gte('ped.fecha', $fecha_inicio),
+                        $qb->expr()->lte('ped.fecha', $fecha_fin),
+                        $qb->expr()->eq('ped.restaurante', $restaurante),
+                        $qb->expr()->eq('ped.pagado', true)
+                ))->leftJoin('ped.lineasPedido', 'l')
+                ->leftJoin('l.producto', 'pro');
+        return $qb->getQuery()->getSingleResult();
+    }
 }
