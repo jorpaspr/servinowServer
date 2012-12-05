@@ -67,6 +67,33 @@ class DefaultController extends Controller
             $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
         }
         
+        
+        if($request->request->has('nombre')){
+            $productoNombre = $request->request->get('nombre');
+        }
+        if($request->request->has('descripcion')){
+            $productoDescripcion = $request->request->get('descripcion');
+        }
+        if($request->request->has('precio')){
+            $productoPrecio = $request->request->get('precio');
+        }
+        if($request->request->has('disponible')){
+            $productoDisponible = true;   
+        } else {
+            $productoDisponible=false;
+        }
+        
+        if($tipo == "aceptarEditar") {
+            $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
+            $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Producto")
+                ->updateProductoById($restaurantID, $platoID, $productoNombre, $productoDescripcion,
+                        $productoPrecio, $productoDisponible);
+        }
+        
+        if($tipo == "descartarEditar"){
+            $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
+        }
+        
         return new RedirectResponse($url);
     }
     
