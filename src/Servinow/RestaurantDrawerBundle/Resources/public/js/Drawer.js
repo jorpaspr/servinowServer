@@ -23,6 +23,16 @@ if(!_servinow)
 			height: 40
 		};
 		
+		var tableDef = {
+			def: $('#formDraggers_table .tableElement'),
+			defTitle: $('#formDraggers_table .tableElement .title'),
+			exampleTable: $('#exampleTable .tableElement'),
+			tallInput: $('#formDraggers_table .tall input'),
+			wideInput: $('#formDraggers_table .wide input'),
+			width: 40,
+			height: 40
+		};
+		
 		var colWidth;
 		var rowHeight;
 		var nCols = 15;
@@ -106,37 +116,93 @@ if(!_servinow)
 					}
 				});
 				
-				objectDef.def.draggable({
-					scroll: false,
-					containment: canvasContainer,
-					appendTo: canvasContainer,
-					handle: '.handle',
-					helper: function(){
-						var helper = objectDef.exampleObject.clone();
-						
-						var helperTitle = helper.find('.title').val( objectDef.defTitle.val() );
-						helper.add(helperTitle)
-							.css({
-								'width' : objectDef.width,
-								'height': objectDef.height
-							});
-						
-						return helper;
-					},
-					stop: function(e, ui){
-						var def = {
-							x: Math.floor(ui.position.left/colWidth),
-							y: Math.floor(ui.position.top/rowHeight),
-							name: objectDef.defTitle.val(),
-							wide: objectDef.wideInput.val(),
-							tall: objectDef.tallInput.val(),
-							
-							id: Math.floor(Math.random()*1000)
-						};
-						
-						addObject(def);
+			tableDef.tallInput.add( tableDef.wideInput )
+				.change(function(){
+					var wideSize = tableDef.wideInput.val();
+					var tallSize = tableDef.tallInput.val();
+					
+					tableDef.width = wideSize*colWidth;
+					tableDef.height = tallSize*rowHeight;
+					
+					tableDef.def.add( tableDef.defTitle )
+						.css({
+							'width' : tableDef.width,
+							'height': tableDef.height
+						});
+
+					if(tallSize == wideSize){
+						tableDef.def.removeClass('wide tall').addClass('square');
+					} else if(tallSize < wideSize){
+						tableDef.def.removeClass('square tall').addClass('wide');
+					} else {
+						tableDef.def.removeClass('square wide').addClass('tall');
 					}
 				});
+				
+			objectDef.def.draggable({
+				scroll: false,
+				containment: canvasContainer,
+				appendTo: canvasContainer,
+				handle: '.handle',
+				helper: function(){
+					var helper = objectDef.exampleObject.clone();
+
+					var helperTitle = helper.find('.title').val( objectDef.defTitle.val() );
+					helper.add(helperTitle)
+						.css({
+							'width' : objectDef.width,
+							'height': objectDef.height
+						});
+
+					return helper;
+				},
+				stop: function(e, ui){
+					var def = {
+						x: Math.floor(ui.position.left/colWidth),
+						y: Math.floor(ui.position.top/rowHeight),
+						name: objectDef.defTitle.val(),
+						wide: objectDef.wideInput.val(),
+						tall: objectDef.tallInput.val(),
+
+						id: Math.floor(Math.random()*1000)
+					};
+
+					addObject(def);
+				}
+			});
+				
+				
+			tableDef.def.draggable({
+				scroll: false,
+				containment: canvasContainer,
+				appendTo: canvasContainer,
+				handle: '.handle',
+				helper: function(){
+					var helper = tableDef.exampleTable.clone();
+
+					var helperTitle = helper.find('.title').text( tableDef.defTitle.text() );
+					helper.add(helperTitle)
+						.css({
+							'width' : tableDef.width,
+							'height': tableDef.height
+						});
+
+					return helper;
+				},
+				stop: function(e, ui){
+					var def = {
+						x: Math.floor(ui.position.left/colWidth),
+						y: Math.floor(ui.position.top/rowHeight),
+						name: tableDef.defTitle.text(),
+						wide: tableDef.wideInput.val(),
+						tall: tableDef.tallInput.val(),
+
+						id: Math.floor(Math.random()*1000)
+					};
+
+					addTable(def);
+				}
+			});
 		}
 		
 		var loadElements = function(){
@@ -166,6 +232,59 @@ if(!_servinow)
 				});
 				
 			newObjectTitle.val(def.name);
+			
+			newObject.data('id', def.id);
+			newObject.find('.removeHandler').click(function(){
+				removeObject(newObject);
+			});
+			
+			newObject.css('position', 'absolute').draggable({
+				scroll: false,
+				containment: canvasContainer,
+				appendTo: canvasContainer,
+				handle: '.handle',
+				stop: function(e, ui){
+					def.y = Math.floor(ui.position.top/rowHeight);
+					def.x = Math.floor(ui.position.left/colWidth);
+					
+					newObject.add(newObjectTitle)
+						.css({
+							top: def.y*rowHeight +5,
+							left: def.x*colWidth +5
+						});
+				}
+			});
+			
+			if(def.wide == def.tall){
+				newObject.removeClass('wide tall').addClass('square');
+			} else if(def.tall < def.wide){
+				newObject.removeClass('square tall').addClass('wide');
+			} else {
+				newObject.removeClass('square wide').addClass('tall');
+			}
+			
+			canvasContainer.append(newObject);
+		}
+		
+		var addTable = function(def){
+			var width = def.wide*colWidth;
+			var height = def.tall*rowHeight;
+			var top = def.y*rowHeight + 5;
+			var left = def.x*colWidth + 5;
+			
+			knowledge.tables.push(def);
+			
+			var newObject = tableDef.exampleTable.clone();
+			var newObjectTitle = newObject.find('.title');
+			newObject.add( newObjectTitle )
+				.css({
+					'width' : width,
+					'height': height,
+					'top' : top,
+					'left': left
+				});
+				
+			newObjectTitle.text(def.name);
 			
 			newObject.data('id', def.id);
 			newObject.find('.removeHandler').click(function(){
