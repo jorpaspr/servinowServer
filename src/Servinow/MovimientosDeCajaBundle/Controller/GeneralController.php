@@ -133,11 +133,16 @@ class GeneralController extends Controller
             }
         }
         
+        $total = $repository->totalPedidosCantidadIngresos($fecha_inicio, $fecha_fin, $restaurantID);
+        
+        $mediaIngresosPedido = $total['ingresos'] / $total['pedidos'];
+        
         return $this->render('ServinowMovimientosDeCajaBundle:General:pedidos.html.twig',
                 array('restaurantID' =>$restaurantID,
                     'fecha_inicio'=> $fecha_inicio,
                     'fecha_fin' => $fecha_fin,
-                    'dia_pedidos' => $dia_pedidos));
+                    'dia_pedidos' => $dia_pedidos,
+                    'mediaIngresosPedido' => $mediaIngresosPedido));
     }
     
     public function mesasAction($restaurantID)
@@ -153,18 +158,21 @@ class GeneralController extends Controller
         if($request->query->has('fecha_fin')){
             $fecha_fin = $request->query->get('fecha_fin');
         }
-        if($fecha_fin != "" && $fecha_inicio != ""){
-        }
-        else{
+        if($fecha_fin == "" || $fecha_inicio == ""){
             // Conseguir la fecha de inicio = fecha actual - 30 días
             $fecha_inicio = date("Ymd", strtotime("-30 day"));
             // Conseguir la fecha de fin = fecha actual
             $fecha_fin = date("Ymd");
         }
         
+        $repository = $this->getDoctrine()
+                ->getRepository('ServinowEntitiesBundle:Mesa');
+        $mesas = $repository->findMesasIngresosCantidad($fecha_inicio, $fecha_fin, $restaurantID);
+        
         return $this->render('ServinowMovimientosDeCajaBundle:General:mesas.html.twig',
                 array('restaurantID' =>$restaurantID,
                     'fecha_inicio'=> $fecha_inicio,
-                    'fecha_fin' => $fecha_fin));
+                    'fecha_fin' => $fecha_fin,
+                    'mesas'=> $mesas));
     }
 }
