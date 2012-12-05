@@ -87,5 +87,7 @@
             Raphael(divChart, width, height).pieChart(x, y, c, values, labels, stroke);
         }
     });
-    $.createPieChart($("#topProductos"), 650, 340, 480, 170, 150, '#fff');
+    $.createPieChart($("#topProductosIngresos"), 650, 340, 480, 170, 150, '#fff');
+    $.createPieChart($("#topProductosCantidad"), 650, 340, 480, 170, 150, '#fff');
 })($);
+
