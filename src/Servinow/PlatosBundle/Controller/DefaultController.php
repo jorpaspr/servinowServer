@@ -10,18 +10,6 @@ class DefaultController extends Controller
 {
     public function indexAction($restaurantID)
     {
-//        $producto = new \Servinow\EntitiesBundle\Entity\Producto();
-//        $formulario = $this->createFormBuilder($producto)
-//                ->add('nombre', 'entity', array(
-//                    'class' => 'Servinow\\EntitiesBundle\\Entity\\Producto',
-//                    'property' => 'nombre',
-//                    'expanded' => false,
-//                    'multiple' => false
-//                    ))
-//                ->getForm();
-//        return $this->render('ServinowPlatosBundle:Default:index.html.twig',
-//                array('formulario' => $formulario->createView()
-//                ));
         $platos = $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Plato")
                             ->findPlatosByRestaurant($restaurantID);
         
@@ -29,11 +17,6 @@ class DefaultController extends Controller
                     array(
                         'restaurantID' => $restaurantID, 
                         'platos' => $platos
-              //          'platos' => array(
-             //               array('id'=> 1, 'nombre' => 'nombre1'),
-              //              array('id' =>2, 'nombre' => 'nombre2')
-                        
-                        
                     )
                 );
     }
@@ -126,8 +109,11 @@ class DefaultController extends Controller
     
     public function nuevoAction($restaurantID){
         
+        /*$categorias = $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Categoria")
+                ->findCategoriasByRestaurante($restaurantID);*/
         
         return $this->render('ServinowPlatosBundle:Default:nuevo.html.twig',
-                array('restaurantID' => $restaurantID));
+                array('restaurantID' => $restaurantID,
+                    /*'categorias' => $categorias*/));
     }
 }
