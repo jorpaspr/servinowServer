@@ -8,17 +8,15 @@
 {% block content %}
 
 <form method="post" action="{{ path('servinow_platos_homepage_decidir', {'restaurantID': 1 }) }}">
-    {#truco marrullero para pasar el productoID#}
-    <input type="text" name="platoID" value="{{productoID.Id}}" hidden>
     <div>
        <div>
-            <input type="text" name="nombre" value="{{productoID.nombre}}">
+            <input type="text" name="nombre">
         </div>
         <div>
-            <input type="textarea" name="descripcion" value="{{productoID.descripcion}}">
+            <input type="textarea" name="descripcion">
         </div>
         <div>
-            <input type="text" name="precio" value="{{productoID.precio}}">
+            <input type="text" name="precio">
         </div>
     </div>
     
@@ -35,16 +33,12 @@
             <input type="checkbox" name="chk_group" checked />Postre<br />
         </div>
         <div>
-            {% if productoID.disponible == true %}
-                <input type="checkbox" name="disponible" checked/>Disponible<br />
-            {%else%}
-                <input type="checkbox" name="disponible" />Disponible<br />
-            {% endif %}
+            <input type="checkbox" name="disponible" />Disponible<br />
         </div>
     </div>
     
-    <button type=submit name="action" value="aceptarEditar">Aceptar</button>
-    <button type=submit name="action" value="descartarEditar">Descartar</button>
+    <button type=submit name="action" value="aceptarNuevo">Aceptar</button>
+    <button type=submit name="action" value="descartarNuevo">Descartar</button>
 </form>
 
 {% endblock %}

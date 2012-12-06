@@ -9,3 +9,7 @@ servinow_platos_homepage_decidir:
 servinow_platos_homepage_editar:
     pattern:  /{productoID}/editar/
     defaults: { _controller: ServinowPlatosBundle:Default:editar }
+    
+servinow_platos_homepage_nuevo:
+    pattern:  /nuevo
+    defaults: { _controller: ServinowPlatosBundle:Default:nuevo }
