@@ -19,12 +19,9 @@
                 <td></td>
                 <td>Categorías<br/>
                     <div class="categorias">
-                        <input type="checkbox" name="chk_group" />Bebidas<br />
-                        <input type="checkbox" name="chk_group" />Bocadillos<br />
-                        <input type="checkbox" name="chk_group" />Platos Combinados<br />
-                        <input type="checkbox" name="chk_group" />Pasta<br />
-                        <input type="checkbox" name="chk_group" />Carne<br />
-                        <input type="checkbox" name="chk_group" />Postre<br />
+                    {% for categoria in categorias %}
+                        <input type="checkbox" name="categoria" value="{{categoria.id}}" />{{categoria.nombre}}<br />
+                    {% endfor %}
                     </div>
                 </td>
             </tr>

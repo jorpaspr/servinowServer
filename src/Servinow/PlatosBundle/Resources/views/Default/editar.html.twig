@@ -8,32 +8,39 @@
 
 <form method="post" action="{{ path('servinow_platos_homepage_decidir', {'restaurantID': 1 }) }}">
     {#truco marrullero para pasar el productoID#}
-    <input type="text" name="platoID" value="{{productoID.Id}}" hidden>
+    <input type="text" name="platoID" value="{{producto.Id}}" hidden>
     <table>
         <tbody>
             <tr>
-                <td>Nombre<br/><input type="text" name="nombre" value="{{productoID.nombre}}" required="required" placeholder="Nombre del plato"/></td>
+                <td>Nombre<br/><input type="text" name="nombre" value="{{producto.nombre}}" required="required" placeholder="Nombre del plato"/></td>
                 <td></td>
                 <td>Imagen<br/><input type="file"/></td>
             </tr>
             <tr>
-                <td>Descripción<br/><textarea rows="4" name="descripcion" required="required" placeholder="Descripción del plato">{{productoID.descripcion}}</textarea></td>
+                <td>Descripción<br/><textarea rows="4" name="descripcion" required="required" placeholder="Descripción del plato">{{producto.descripcion}}</textarea></td>
                 <td></td>
                 <td>Categorías<br/>
                     <div class="categorias">
-                        <input type="checkbox" name="chk_group" checked />Bebidas<br />
-                        <input type="checkbox" name="chk_group" checked />Bocadillos<br />
-                        <input type="checkbox" name="chk_group" checked />Platos Combinados<br />
-                        <input type="checkbox" name="chk_group" checked />Pasta<br />
-                        <input type="checkbox" name="chk_group" checked />Carne<br />
-                        <input type="checkbox" name="chk_group" checked />Postre<br />
+                    {% for categoria in categorias %}
+
+                        <input type="checkbox" name="categorias[]" value="{{categoria.id}}"
+                        {% for categoriaPlato in producto.categorias %}
+                            {% if categoriaPlato.id == categoria.id %}
+
+                               checked
+                            {% endif %}
+                        {% endfor %}
+
+                        />{{categoria.nombre}}<br />
+                    {% endfor %}
+
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>Precio<br/><input type="number" name="precio" value="{{productoID.precio}}" required="required" placeholder="X.Y"/> €</td>
+                <td>Precio<br/><input type="number" name="precio" value="{{producto.precio}}" required="required" placeholder="X.Y"/> €</td>
                 <td></td>
-                <td><input type="checkbox" name="disponible" {% if productoID.disponible == true %}checked {% endif %}/>Disponible<br /></td>
+                <td><input type="checkbox" name="disponible" {% if producto.disponible == true %}checked {% endif %}/>Disponible<br /></td>
             </tr>
             <tr>
                 <td></td>

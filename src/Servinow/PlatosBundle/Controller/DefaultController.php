@@ -32,65 +32,66 @@ class DefaultController extends Controller
         if($request->request->has('action')){
             $tipo = $request->request->get('action');
         }
-        else{
-            $tipo = "editar"; //TODO
-        }
-        
-        if($tipo == "nuevo") {
-            $url = $this->generateUrl('servinow_platos_homepage_nuevo', array(
-                'restaurantID' => $restaurantID
-            ));
-        }
-        
-        if($tipo == "editar") {
-            $url = $this->generateUrl('servinow_platos_homepage_editar', array(
-                'restaurantID' => $restaurantID,
-                'productoID' => $platoID
-            ));
-        }
-        
-        if($tipo == "eliminar"){
-            
-            $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Plato")
-                ->deletePlatoByID($platoID);
-            $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
-        }
-        
         
         if($request->request->has('nombre')){
             $productoNombre = $request->request->get('nombre');
         }
+        
         if($request->request->has('descripcion')){
             $productoDescripcion = $request->request->get('descripcion');
         }
+        
         if($request->request->has('precio')){
             $productoPrecio = $request->request->get('precio');
         }
+        
         if($request->request->has('disponible')){
             $productoDisponible = true;   
         } else {
             $productoDisponible=false;
         }
         
-        if($tipo == "aceptarEditar") {
+        
+        if($tipo == "nuevo")
+        {
+            $url = $this->generateUrl('servinow_platos_homepage_nuevo', array(
+                'restaurantID' => $restaurantID
+            ));            
+        }
+        else if ($tipo == "editar")
+        {
+            $url = $this->generateUrl('servinow_platos_homepage_editar', array(
+                'restaurantID' => $restaurantID,
+                'productoID' => $platoID
+            ));            
+        }
+        else if($tipo == "eliminar")
+        {            
+            $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Plato")
+                ->deletePlatoByID($platoID);
+            $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
+            
+        }
+        else if($tipo == "aceptarEditar")
+        {
             $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
             $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Producto")
                 ->updateProductoById($restaurantID, $platoID, $productoNombre, $productoDescripcion,
-                        $productoPrecio, $productoDisponible);
+                        $productoPrecio, $productoDisponible);            
         }
-        
-        if($tipo == "descartarEditar"){
+        else if($tipo == "descartarEditar")
+        {
             $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
         }
-        
-        if($tipo == "aceptarNuevo") {
+        else if($tipo == "aceptarNuevo")
+        {
             $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
             $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Plato")
                 ->insertPlato($restaurantID, $productoNombre, $productoDescripcion,
                         $productoPrecio, $productoDisponible);
         }
-        
-        if($tipo == "descartarNuevo"){
+        else if($tipo == "descartarNuevo")
+        {
             $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
         }
         
@@ -102,18 +103,22 @@ class DefaultController extends Controller
         $producto = $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Producto")
                 ->findProductoId($restaurantID, $productoID);
         
+        $categorias = $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Categoria")
+                ->findCategoriasByRestaurante($restaurantID);
+        
         return $this->render('ServinowPlatosBundle:Default:editar.html.twig',
                 array('restaurantID' => $restaurantID,
-                    'productoID' => $producto));
+                    'producto' => $producto,
+                    'categorias' => $categorias));
     }
     
     public function nuevoAction($restaurantID){
         
-        /*$categorias = $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Categoria")
-                ->findCategoriasByRestaurante($restaurantID);*/
+        $categorias = $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Categoria")
+                ->findCategoriasByRestaurante($restaurantID);
         
         return $this->render('ServinowPlatosBundle:Default:nuevo.html.twig',
                 array('restaurantID' => $restaurantID,
-                    /*'categorias' => $categorias*/));
+                    'categorias' => $categorias));
     }
 }

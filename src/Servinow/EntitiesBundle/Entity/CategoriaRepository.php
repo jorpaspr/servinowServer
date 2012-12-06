@@ -12,8 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoriaRepository extends EntityRepository
 {
-     public function findCategoriasByRestaurante($restauranteId){
+    public function findCategoriasByRestaurante($restauranteId){
+        // TODO Las categorías deberían ser definidas por cada restaurante.
+        // Reemplazar return una vez solucionado.
+        /*return $this->getEntityManager()->getRepository("ServinowEntitiesBundle:Categoria")
+                ->findBy(array('restaurante'=>$restauranteId));*/
         return $this->getEntityManager()->getRepository("ServinowEntitiesBundle:Categoria")
-                ->findBy(array('restaurante'=>$restauranteId));
+                ->findAll();
     }
 }
