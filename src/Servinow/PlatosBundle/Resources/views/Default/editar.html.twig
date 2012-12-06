@@ -12,12 +12,12 @@
     <table>
         <tbody>
             <tr>
-                <td>Nombre<br/><input type="text" name="nombre" value="{{productoID.nombre}}"/></td>
+                <td>Nombre<br/><input type="text" name="nombre" value="{{productoID.nombre}}" required="required"/></td>
                 <td></td>
                 <td>Imagen<br/><input type="file"/></td>
             </tr>
             <tr>
-                <td>Descripción<br/><textarea rows="4" cols="20" name="descripcion" >{{productoID.descripcion}}</textarea></td>
+                <td>Descripción<br/><textarea rows="4" cols="20" name="descripcion" required="required">{{productoID.descripcion}}</textarea></td>
                 <td></td>
                 <td>Categorías<br/>
                     <div style="border: 1px solid #ada9a5">
@@ -31,7 +31,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Precio<br/><input type="text" name="precio" value="{{productoID.precio}}"/></td>
+                <td>Precio<br/><input type="text" name="precio" value="{{productoID.precio}}" required="required"/></td>
                 <td></td>
                 <td><input type="checkbox" name="disponible" {% if productoID.disponible == true %}checked {% endif %}/>Disponible<br /></td>
             </tr>
