@@ -1,0 +1,7 @@
+parameters:
+#    servinow_movimientos_de_caja.example.class: Servinow\MovimientosDeCajaBundle\Example
+
+services:
+#    servinow_movimientos_de_caja.example:
+#        class: %servinow_movimientos_de_caja.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

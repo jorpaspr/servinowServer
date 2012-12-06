@@ -1,6 +1,9 @@
 servinow_gestion_pedidos:
     resource: "@ServinowGestionPedidosBundle/Resources/config/routing.yml"
     prefix:   /{restaurantID}/
+servinow_movimientos_de_caja:
+    resource: "@ServinowMovimientosDeCajaBundle/Resources/config/routing.yml"
+    prefix:   /{restaurantID}/caja
 
 servinow_navigation:
     resource: "@ServinowNavigationBundle/Resources/config/routing.yml"

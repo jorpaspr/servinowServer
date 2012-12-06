@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Servinow\NavigationBundle\ServinowNavigationBundle(),
             new Servinow\GestionPedidosBundle\ServinowGestionPedidosBundle(),
+            new Servinow\MovimientosDeCajaBundle\ServinowMovimientosDeCajaBundle(),
             new Servinow\EntitiesBundle\ServinowEntitiesBundle(),
         );
 

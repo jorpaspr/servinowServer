@@ -1,0 +1,32 @@
+
+# General
+servinow_movimientos_de_caja_general:
+    pattern:  /general/
+    defaults: { _controller: ServinowMovimientosDeCajaBundle:General:ingresos }
+
+servinow_movimientos_de_caja_general_pago:
+    pattern:  /general/pago/
+    defaults: { _controller: ServinowMovimientosDeCajaBundle:General:pago }
+    
+servinow_movimientos_de_caja_general_ingresos:
+    pattern:  /general/ingresos/
+    defaults: { _controller: ServinowMovimientosDeCajaBundle:General:ingresos }
+
+servinow_movimientos_de_caja_general_pedidos:
+    pattern:  /general/pedidos/
+    defaults: { _controller: ServinowMovimientosDeCajaBundle:General:pedidos }
+    
+servinow_movimientos_de_caja_general_mesas:
+    pattern:  /general/mesas/
+    defaults: { _controller: ServinowMovimientosDeCajaBundle:General:mesas }
+
+# Productos
+servinow_movimientos_de_caja_productos:
+    pattern:  /productos/
+    defaults: { _controller: ServinowMovimientosDeCajaBundle:Productos:productos }
+
+# Movimientos
+servinow_movimientos_de_caja_movimientos:
+    pattern:  /movimientos/
+    defaults: { _controller: ServinowMovimientosDeCajaBundle:Movimientos:movimientos }
+    
