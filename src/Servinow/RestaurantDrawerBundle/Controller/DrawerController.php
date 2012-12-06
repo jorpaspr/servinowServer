@@ -36,7 +36,35 @@ class DrawerController extends Controller {
 					'name' => 'barr2a'
 				),
 			),
-			'tables' => array()
+			'tables' => array(
+				array(
+					'id' => 1,
+					'x' => 0,
+					'y' => 3,
+					'wide' => 1,
+					'tall' => 4,
+					'min' => 2,
+					'max' => 4
+				),
+				array(
+					'id' => 2,
+					'x' => 5,
+					'y' => 7,
+					'wide' => 1,
+					'tall' => 2,
+					'min' => 2,
+					'max' => 4
+				),
+				array(
+					'id' => 4,
+					'x' => 8,
+					'y' => 3,
+					'wide' => 2,
+					'tall' => 2,
+					'min' => 6,
+					'max' => 8
+				)
+			)
 		);
 		
 		return $this->render('ServinowRestaurantDrawerBundle:Drawer:index.html.twig'
