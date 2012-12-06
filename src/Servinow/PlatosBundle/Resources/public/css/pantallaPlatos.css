@@ -17,3 +17,10 @@ body {
 td {
     padding: 10px;
 }
+
+div.categorias {
+    height: 100px;
+    overflow: auto;
+    padding: 0px 5px;
+    border: 1px solid #ada9a5;
+}
