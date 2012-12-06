@@ -26,4 +26,21 @@ class PlatoRepository extends EntityRepository
         $em->remove($plato);
         $em->flush();
     }
+    
+    public function insertPlato($RestauranteId, $nombre, $descripcion, $precio, $disponible){
+        
+        $plato = new Plato;
+        $em = $this->getEntityManager();
+        $restaurante = $em->getRepository("ServinowEntitiesBundle:Restaurante")->find($RestauranteId);
+        $plato->setNombre($nombre);
+        $plato->setDescripcion($descripcion);
+     /*   $producto->setPrecio(doubleval($doublePrecio)); */
+        $plato->setRestaurante($restaurante);
+        $plato->setDisponible($disponible);
+        $plato->setImagen("asd");
+        $plato->SetPrecio(doubleval('2.0'));
+        $em->persist($plato);
+        
+        $em->flush();
+    }
 }

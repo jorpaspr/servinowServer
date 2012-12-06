@@ -53,6 +53,12 @@ class DefaultController extends Controller
             $tipo = "editar"; //TODO
         }
         
+        if($tipo == "nuevo") {
+            $url = $this->generateUrl('servinow_platos_homepage_nuevo', array(
+                'restaurantID' => $restaurantID
+            ));
+        }
+        
         if($tipo == "editar") {
             $url = $this->generateUrl('servinow_platos_homepage_editar', array(
                 'restaurantID' => $restaurantID,
@@ -94,6 +100,17 @@ class DefaultController extends Controller
             $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
         }
         
+        if($tipo == "aceptarNuevo") {
+            $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
+            $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Plato")
+                ->insertPlato($restaurantID, $productoNombre, $productoDescripcion,
+                        $productoPrecio, $productoDisponible);
+        }
+        
+        if($tipo == "descartarNuevo"){
+            $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
+        }
+        
         return new RedirectResponse($url);
     }
     
@@ -105,5 +122,12 @@ class DefaultController extends Controller
         return $this->render('ServinowPlatosBundle:Default:editar.html.twig',
                 array('restaurantID' => $restaurantID,
                     'productoID' => $producto));
+    }
+    
+    public function nuevoAction($restaurantID){
+        
+        
+        return $this->render('ServinowPlatosBundle:Default:nuevo.html.twig',
+                array('restaurantID' => $restaurantID));
     }
 }

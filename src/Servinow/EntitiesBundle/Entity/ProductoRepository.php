@@ -18,15 +18,6 @@ class ProductoRepository extends EntityRepository
         return $producto;
     }
     
-    public function updateProductoById($RestauranteId, $productoId, $nombre, $descripcion, $precio, $disponible){
-        $producto = $this->getEntityManager()->getRepository("ServinowEntitiesBundle:Producto")
-                ->findOneBy(array('id'=>$productoId, 'restaurante'=>$RestauranteId));
-        $em = $this->getEntityManager();
-        $producto->setNombre($nombre);
-        $producto->setDescripcion($descripcion);
-     /*   $producto->setPrecio(doubleval($doublePrecio)); */
-        $producto->setDisponible($disponible);
-        $em->flush();
-    }
+    
     
 }
