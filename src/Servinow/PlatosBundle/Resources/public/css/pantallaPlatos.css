@@ -13,3 +13,7 @@ root {
 body {
     font-family: sans-serif;
 }
+
+td {
+    padding: 10px;
+}
