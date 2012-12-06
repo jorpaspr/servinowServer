@@ -1,43 +1,48 @@
 {% extends 'ServinowNavigationBundle:Navigation:index.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowplatos/css/pantallaPlatos.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowplatos/css/pantallaPlatos.css') }}">
 {% endblock %}
 
 {% block content %}
 
 <form method="post" action="{{ path('servinow_platos_homepage_decidir', {'restaurantID': 1 }) }}">
-    <div>
-       <div>
-            <input type="text" name="nombre">
-        </div>
-        <div>
-            <input type="textarea" name="descripcion">
-        </div>
-        <div>
-            <input type="text" name="precio">
-        </div>
-    </div>
-    
-    <div>
-       <div>
-            <input type="file" name="imagen" value="">
-        </div>
-        <div>
-            <input type="checkbox" name="chk_group" checked />Bebidas<br />
-            <input type="checkbox" name="chk_group" checked />Bocadillos<br />
-            <input type="checkbox" name="chk_group" checked />Platos Combinados<br />
-            <input type="checkbox" name="chk_group" checked />Pasta<br />
-            <input type="checkbox" name="chk_group" checked />Carne<br />
-            <input type="checkbox" name="chk_group" checked />Postre<br />
-        </div>
-        <div>
-            <input type="checkbox" name="disponible" />Disponible<br />
-        </div>
-    </div>
-    
-    <button type=submit name="action" value="aceptarNuevo">Aceptar</button>
-    <button type=submit name="action" value="descartarNuevo">Descartar</button>
+    <table>
+        <tbody>
+            <tr>
+                <td>Nombre<br/><input type="text" name="nombre"/></td>
+                <td></td>
+                <td>Imagen<br/><input type="file"/></td>
+            </tr>
+            <tr>
+                <td>Descripción<br/><textarea rows="4" cols="20" name="descripcion" ></textarea></td>
+                <td></td>
+                <td>Categorías<br/>
+                    <div style="border: 1px solid">
+                        <input type="checkbox" name="chk_group" />Bebidas<br />
+                        <input type="checkbox" name="chk_group" />Bocadillos<br />
+                        <input type="checkbox" name="chk_group" />Platos Combinados<br />
+                        <input type="checkbox" name="chk_group" />Pasta<br />
+                        <input type="checkbox" name="chk_group" />Carne<br />
+                        <input type="checkbox" name="chk_group" />Postre<br />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Precio<br/><input type="text" name="precio"/></td>
+                <td></td>
+                <td><input type="checkbox" name="disponible"/>Disponible<br /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">
+                    <button type=submit name="action" value="aceptarNuevo">Aceptar</button>
+                    <button type=submit name="action" value="descartarNuevo">Descartar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </form>
 
 {% endblock %}
