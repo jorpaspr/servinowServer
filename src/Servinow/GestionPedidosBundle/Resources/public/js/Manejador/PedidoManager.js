@@ -14,6 +14,15 @@
 			pedido.lineasPedido.push(lineaPedido);
 		}
 		this.loadAll = function(){
+			
+		}
+		this.load = function(onSuccess){
+			$.ajax({
+				url: 'API/pedidos',
+				type: "GET",
+				dataType: "json",
+				success: onSuccess
+			});
 		}
 	}
 })(ep);

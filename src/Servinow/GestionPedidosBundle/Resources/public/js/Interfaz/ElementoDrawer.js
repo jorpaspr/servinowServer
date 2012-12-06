@@ -48,7 +48,7 @@
 			for(var j = 0; j < pedido.lineasPedido.length; ++j){
 				var lineaPedido = pedido.lineasPedido[j];
 				var estado = lineaPedido.estado;
-                                
+				
 				this.drawPedidoEnEstado(panel, pedido, estado);
 				this.drawLineaPedido(panel, pedido, lineaPedido);
 			}
@@ -58,11 +58,11 @@
 			if(pedidoExist == null){
 				var pedidoElementGraphic = new ep.Interfaz.Entidad.PedidoElementoGrafico();
 				pedidoElementGraphic.create(estado, pedido);
-					
+
 				elements.newPedidoElement(pedidoElementGraphic, panel, estado, pedido);
-					
+
 				var vistaPedidosElementoGrafico = elements.getVistaPedidosElement(panel, estado).element;
-				
+
 				vistaPedidosElementoGrafico.addPedido(pedidoElementGraphic);
 			}
                     
@@ -103,6 +103,8 @@
 			
 			var estadoElementGraphic = elements.getEstadoElement(panel,  lineaPedido.estado).element;
 			estadoElementGraphic.incrLineasPedido();
+			
+			productoElementGraphic.enableNextStateButtonLineaPedido();
 		}
 		this.clearLineaPedido = function(panel, pedido, lineaPedido){
 			var estado = lineaPedido.estado;
@@ -113,6 +115,10 @@
 			elements["panel"+panel.tipo].estados["estado"+estado.tipo].vistaPedidos.pedidos["pedido"+pedido.id].productos["producto"+lineaPedido.producto.id] = null;
                     
 			productoElementGraphic.element.remove();
+		}
+		this.toggleNextStateButtonLineaPedido = function(panel, pedido, lineaPedido){
+			var productoElementGraphic = elements.getLineaPedidoElement(panel, lineaPedido.estado, pedido, lineaPedido).element;
+			productoElementGraphic.toggleNextStateButtonLineaPedido();
 		}
 	}
 })(ep);

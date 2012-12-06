@@ -58,21 +58,21 @@
 			
 			return lineaPedidoObj;
 		}
-                this.drawUpdateEstadoLineaPedido = function(panel, pedido, lineaPedido, estado){
-                    var elementDrawer = new ep.Interfaz.ElementoDrawer();
+		this.drawUpdateEstadoLineaPedido = function(panel, pedido, lineaPedido, estado){
+			var elementDrawer = new ep.Interfaz.ElementoDrawer();
                     
-                    var estadoAnterior = lineaPedido.estado;
+			var estadoAnterior = lineaPedido.estado;
                     
-                    var estadoObj = this.addEstado(estado);
-                    this.updateEstadoLineaPedido(lineaPedido, estadoObj);
-                    
-                    elementDrawer.drawUpdatedEstadoLineaPedido(panel, pedido, lineaPedido, estadoAnterior);                
-                }
-                this.updateEstadoLineaPedido = function(lineaPedido, estado){
-                        var lineaPedidoManager = new ep.Manejador.LineaPedidoManager();
+			var estadoObj = this.addEstado(estado);
+			this.updateEstadoLineaPedido(lineaPedido, estadoObj);
+			
+			elementDrawer.drawUpdatedEstadoLineaPedido(panel, pedido, lineaPedido, estadoAnterior);                
+		}
+		this.updateEstadoLineaPedido = function(lineaPedido, estado){
+			var lineaPedidoManager = new ep.Manejador.LineaPedidoManager();
                         
-                        lineaPedidoManager.updateEstado(lineaPedido, estado);                    
-                }
+			lineaPedidoManager.updateEstado(lineaPedido, estado);                    
+		}
 		this.addEstado = function(tipo){
 			switch(tipo){
 				case ep.Constant.ESTADO_COLA:
@@ -119,5 +119,16 @@
 		this.drawProducto = function(panel, producto){
 
 		}
+		this.loadPedidos = function(onSuccess){
+			var pedidoManager = new ep.Manejador.PedidoManager();
+			pedidoManager.load(onSuccess);
+		}
+		this.saveUpdateEstadoLineaPedido = function(panel, pedido, lineaPedido, estado, onSuccess){
+			var elementDrawer = new ep.Interfaz.ElementoDrawer();
+			elementDrawer.toggleNextStateButtonLineaPedido(panel, pedido, lineaPedido);
+			
+			var lineaPedidoManager = new ep.Manejador.LineaPedidoManager();
+			lineaPedidoManager.saveUpdateEstado(lineaPedido, estado, onSuccess);
+		}		
 	}
 })(ep);

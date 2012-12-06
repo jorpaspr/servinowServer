@@ -11,8 +11,20 @@
 			
 			return lineaPedido;
 		}
-                this.updateEstado = function(lineaPedido, estado){
-                        lineaPedido.estado = estado;
-                }
+		this.updateEstado = function(lineaPedido, estado){
+			lineaPedido.estado = estado;
+		}
+		this.saveUpdateEstado = function(lineaPedido, estado, onSuccess){
+			$.ajax({
+				url: 'API/update/estado/lineapedido',
+				type: "POST",
+				data: {
+					id: lineaPedido.id,
+					estado: estado
+				},
+				dataType: "json",
+				success: onSuccess
+			});
+		}
 	}
 })(ep);
