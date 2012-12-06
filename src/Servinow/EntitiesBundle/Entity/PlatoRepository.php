@@ -38,9 +38,11 @@ class PlatoRepository extends EntityRepository
         $plato->setRestaurante($restaurante);
         $plato->setDisponible($disponible);
         $plato->setImagen("asd");
-        $plato->SetPrecio(doubleval('2.0'));
+        $plato->SetPrecio(doubleval($precio));
         $em->persist($plato);
         
         $em->flush();
     }
+    
+    
 }
