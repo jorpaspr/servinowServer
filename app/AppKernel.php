@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Servinow\NavigationBundle\ServinowNavigationBundle(),
             new Servinow\MovimientosDeCajaBundle\ServinowMovimientosDeCajaBundle(),
             new Servinow\EntitiesBundle\ServinowEntitiesBundle(),
+            new Servinow\FacturaBundle\ServinowFacturaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
