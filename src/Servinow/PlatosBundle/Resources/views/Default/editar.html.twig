@@ -31,7 +31,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Precio<br/><input type="text" name="precio" value="{{productoID.precio}}" required="required" placeholder="X.Y"/> €</td>
+                <td>Precio<br/><input type="number" name="precio" value="{{productoID.precio}}" required="required" placeholder="X.Y"/> €</td>
                 <td></td>
                 <td><input type="checkbox" name="disponible" {% if productoID.disponible == true %}checked {% endif %}/>Disponible<br /></td>
             </tr>
