@@ -8,6 +8,8 @@ if(!_servinow)
 			tables:[]
 		};
 		
+		var drawerKnowledge = new servinow.DrawerKnowledge();
+		
 		var canvasContainer = $('#drawerCanvasContainer');
 		var canvasEl = $('#drawerCanvas');
 		var ctx;
@@ -29,6 +31,8 @@ if(!_servinow)
 			exampleTable: $('#exampleTable .tableElement'),
 			tallInput: $('#formDraggers_table .tall input'),
 			wideInput: $('#formDraggers_table .wide input'),
+			minInput: $('#formDraggers_table .configBottom .min input'),
+			maxInput: $('#formDraggers_table .configBottom .max input'),
 			width: 40,
 			height: 40
 		};
@@ -95,8 +99,8 @@ if(!_servinow)
 		var prepareInterfaceEvents = function(){
 			objectDef.tallInput.add( objectDef.wideInput )
 				.change(function(){
-					var wideSize = objectDef.wideInput.val();
-					var tallSize = objectDef.tallInput.val();
+					var wideSize = parseInt(objectDef.wideInput.val());
+					var tallSize = parseInt(objectDef.tallInput.val());
 					
 					objectDef.width = wideSize*colWidth;
 					objectDef.height = tallSize*rowHeight;
@@ -118,8 +122,8 @@ if(!_servinow)
 				
 			tableDef.tallInput.add( tableDef.wideInput )
 				.change(function(){
-					var wideSize = tableDef.wideInput.val();
-					var tallSize = tableDef.tallInput.val();
+					var wideSize = parseInt(tableDef.wideInput.val());
+					var tallSize = parseInt(tableDef.tallInput.val());
 					
 					tableDef.width = wideSize*colWidth;
 					tableDef.height = tallSize*rowHeight;
@@ -161,8 +165,8 @@ if(!_servinow)
 						x: Math.floor(ui.position.left/colWidth),
 						y: Math.floor(ui.position.top/rowHeight),
 						name: objectDef.defTitle.val(),
-						wide: objectDef.wideInput.val(),
-						tall: objectDef.tallInput.val(),
+						wide: parseInt( objectDef.wideInput.val() ),
+						tall: parseInt( objectDef.tallInput.val() ),
 
 						id: Math.floor(Math.random()*1000)
 					};
@@ -180,7 +184,7 @@ if(!_servinow)
 				helper: function(){
 					var helper = tableDef.exampleTable.clone();
 
-					var helperTitle = helper.find('.title').text( tableDef.defTitle.text() );
+					var helperTitle = helper.find('.title').text( " " );
 					helper.add(helperTitle)
 						.css({
 							'width' : tableDef.width,
@@ -194,10 +198,10 @@ if(!_servinow)
 						x: Math.floor(ui.position.left/colWidth),
 						y: Math.floor(ui.position.top/rowHeight),
 						name: tableDef.defTitle.text(),
-						wide: tableDef.wideInput.val(),
-						tall: tableDef.tallInput.val(),
-
-						id: Math.floor(Math.random()*1000)
+						wide: parseInt( tableDef.wideInput.val() ),
+						tall: parseInt( tableDef.tallInput.val() ),
+						min: parseInt( tableDef.minInput.val() ),
+						max: parseInt( tableDef.maxInput.val() )
 					};
 
 					addTable(def);
@@ -210,6 +214,10 @@ if(!_servinow)
 			
 			for(var i=0; i<toLoad.objects.length; i++){
 				addObject( toLoad.objects[i] );
+			}
+			
+			for(var i=0; i<toLoad.tables.length; i++){
+				addTable( toLoad.tables[i] );
 			}
 		}
 		
@@ -284,12 +292,21 @@ if(!_servinow)
 					'left': left
 				});
 				
-			newObjectTitle.text(def.name);
+			var withID = function(){
+				newObjectTitle.text(def.id);
+				newObject.data('id', def.id);
+				newObject.find('.removeHandler').click(function(){
+					removeObject(newObject);
+				});
+			}
 			
-			newObject.data('id', def.id);
-			newObject.find('.removeHandler').click(function(){
-				removeObject(newObject);
-			});
+			if(def.id > 0) {
+				withID();
+			} else {
+				newObjectTitle.text(" ");
+				newObject.find('.removeHandler');
+				drawerKnowledge.addNewTable(def, withID);
+			}
 			
 			newObject.css('position', 'absolute').draggable({
 				scroll: false,

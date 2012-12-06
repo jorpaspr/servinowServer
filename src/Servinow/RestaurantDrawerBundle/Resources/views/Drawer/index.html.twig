@@ -8,6 +8,7 @@
 {% block javascripts %}
 <script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/jquery-ui-1.9.2.custom.min.js')}}" ></script>
 <script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/Drawer.js')}}" ></script>
+<script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/DrawerKnowledge.js')}}" ></script>
 <script type="text/javascript" src="{{asset('bundles/servinowrestaurantdrawer/js/drawerExec.js')}}" ></script>
 {% endblock %}
 
@@ -29,7 +30,7 @@
 			<p class="objectElement tableElement">
 				<span class="handler" >+</span>
 				<span class="removeHandler" >-</span>
-				<span class="title" ></span>
+				<span class="title" >tableID</span>
 			</p>
 		</div>
 	</div>
@@ -78,13 +79,13 @@
 			</div>
 			<div class="configBottom">
 				<span>{{"Comensales"}} </span>
-				<label>
+				<label class="min" >
 					<span>{{"mínimos" | trans}}:</span>
-					<input type="number" step="1" min="1">
+					<input type="number" step="1" min="1" value="2" >
 				</label>
-				<label>
+				<label class="max" >
 					<span>{{"y máximos" | trans}}:</span>
-					<input type="number" step="1" min="1">
+					<input type="number" step="1" min="1" value="4" >
 				</label>
 			</div>
 		</div>
