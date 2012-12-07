@@ -6,6 +6,8 @@
 
 {% block content %}
 
+<h2>Edición del plato <span class="editarPlato">{{producto.nombre}}</span></h2>
+
 <form method="post" action="{{ path('servinow_platos_homepage_decidir', {'restaurantID': 1 }) }}">
     {#truco marrullero para pasar el productoID#}
     <input type="text" name="platoID" value="{{producto.Id}}" hidden>
