@@ -10,8 +10,10 @@ root {
     display: block;
 }
 
-body {
+html {
     font-family: sans-serif;
+    /*background-color: #333333;
+    color:white;*/
 }
 
 td {
@@ -23,4 +25,14 @@ div.categorias {
     overflow: auto;
     padding: 0px 5px;
     border: 1px solid #ada9a5;
+}
+
+form.listadoPlatos {
+    margin:10px 0px;
+    overflow:hidden;
+}
+
+select.listadoPlatos {
+    float: left;
+    width: 300px;
 }
