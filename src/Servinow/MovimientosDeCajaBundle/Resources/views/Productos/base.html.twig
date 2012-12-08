@@ -51,19 +51,20 @@
                 <input type="text" name="fecha_fin" id="datepicker_fecha_fin" value="{{fecha_fin}}"/>
                 <button type="submit" class="btn">Buscar</button>
             </form>
-            
-            <form class="formulario_buscar">
-                <input type="text" name="producto" id="buscar_producto" 
-                       placeholder="{%trans%}enter.product{%endtrans%}">
-                <button type="submit" class="btn button_buscar"
-                <button type="submit" class="">{%trans%}search{%endtrans%}</button>
-            </form>
-            <a href="{{path('servinow_movimientos_de_caja_productos', 
-                {'restaurantID': restaurantID})}}"
-               class="btn a_button"
-            >
-                {%trans%}top10{%endtrans%}
-            </a>
+    </div>
+     <div id="productos_nav">
+                <form class="formulario_buscar">
+                    <input type="text" name="producto" id="buscar_producto" 
+                        placeholder="{%trans%}enter.product{%endtrans%}">
+                    <button type="submit" class="btn button_buscar"
+                    <button type="submit" class="">{%trans%}search{%endtrans%}</button>
+                </form>
+                <a href="{{path('servinow_movimientos_de_caja_productos', 
+                    {'restaurantID': restaurantID})}}"
+                class="btn a_button"
+                >
+                    {%trans%}top10{%endtrans%}
+        </a>
     </div>
 </div>
 
