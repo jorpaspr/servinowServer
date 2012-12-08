@@ -9,9 +9,9 @@
 {% endblock %}
     
 {% block javascripts %}
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-    <script src="{{asset('bundles/servinowmovimientosdecaja/js/jquery.dataTables.min.js')}}"></script>
-    <script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{asset('bundles/servinowmovimientosdecaja/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript">
         $(function() {
             $( "#datepicker_fecha_dia" ).datepicker({
                 defaultDate: "+1w",
