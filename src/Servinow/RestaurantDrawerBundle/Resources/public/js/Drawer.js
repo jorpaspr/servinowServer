@@ -244,6 +244,17 @@ if(!_servinow)
 			for(var i=0; i<toLoad.tables.length; i++){
 				addTable( toLoad.tables[i] );
 			}
+			
+			var size = nCols*nRows;
+			for(var i=0; i<size; i++){
+				if(toLoad.floor[i]){
+					var pos = {
+						x: i%nCols,
+						y: Math.floor(i/nCols)
+					};
+					toogleFloor( pos );
+				}
+			}
 		}
 	
 		var toogleFloor = function(pos){

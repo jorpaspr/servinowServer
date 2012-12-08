@@ -64,6 +64,13 @@ class DrawerController extends Controller {
 					'min' => 6,
 					'max' => 8
 				)
+			),
+			'floor' => array(
+				1 => true,
+				2 => true,
+				50 => true,
+				51 => true,
+				30 => false
 			)
 		);
 		
