@@ -9,7 +9,7 @@
 <h2>Gestión de platos</h2>
 
 <form class="listadoPlatos" method="post" action="{{ path('servinow_platos_homepage_decidir', {'restaurantID': 1 }) }}">
-    <select class="listadoPlatos" id="listadoPlatos" name='platoID' size="10">
+    <select class="listadoPlatos" id="listadoPlatos" name='platoID' size="10" required="required">
     {% for plato in platos %}
         <option value="{{plato.id}}" >{{plato.nombre}}</option>
     {% endfor %}
