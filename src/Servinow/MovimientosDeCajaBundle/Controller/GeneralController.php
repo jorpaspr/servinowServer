@@ -142,6 +142,7 @@ class GeneralController extends Controller
                     'fecha_inicio'=> $fecha_inicio,
                     'fecha_fin' => $fecha_fin,
                     'dia_pedidos' => $dia_pedidos,
+                    'mediaIngresosPedido' => number_format($mediaIngresosPedido,2)));
     }
     
     public function mesasAction($restaurantID)
