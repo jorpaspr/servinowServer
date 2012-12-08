@@ -29,6 +29,13 @@
 	left: 5px;
 }
 
+#drawerCanvasContainer .floor {
+	position: absolute;
+	display: block;
+	background-color: black;
+	z-index: 1;
+}
+
 #drawerKnowledge, #exampleObject, #exampleTable{
 	display: none;
 }
@@ -101,6 +108,7 @@
 	background-color: #D0F5FF;
 	float: right;
 	position: absolute;
+	z-index: 3;
 }
 
 #formDraggers .objectElement{

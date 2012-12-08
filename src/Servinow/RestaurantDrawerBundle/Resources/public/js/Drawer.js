@@ -5,8 +5,10 @@ if(!_servinow)
 	servinow.Drawer = function(){
 		var knowledge = {
 			objects:[],
-			tables:[]
+			tables:[],
+			floor: []
 		};
+		var floors = [];
 		
 		var drawerKnowledge = new servinow.DrawerKnowledge();
 		
@@ -54,6 +56,7 @@ if(!_servinow)
 			
 			if(goodStart) {
 				prepareCanvas();
+				prepareFloorDrawerEvents();
 				prepareInterfaceEvents();
 				
 				loadElements();
@@ -94,6 +97,28 @@ if(!_servinow)
 				ctx.lineTo(width,posy);
 				ctx.stroke();
 			}
+		}
+		
+		var prepareFloorDrawerEvents = function(){
+			canvasContainer.on("click", ".floor, #drawerCanvas" ,function(e){
+				var _t = $(this);
+				
+				var offset;
+				if(_t.is('.floor'))
+					offset = _t.parent().offset();
+				else
+					offset = _t.offset();
+				
+				var relX = e.pageX - offset.left;
+				var relY = e.pageY - offset.top;
+				
+				var pos = {
+					x: Math.floor(relX/colWidth),
+					y: Math.floor(relY/rowHeight)
+				};
+				
+				toogleFloor(pos);
+			});
 		}
 		
 		var prepareInterfaceEvents = function(){
@@ -218,6 +243,25 @@ if(!_servinow)
 			
 			for(var i=0; i<toLoad.tables.length; i++){
 				addTable( toLoad.tables[i] );
+			}
+		}
+	
+		var toogleFloor = function(pos){
+			var p = pos.y*nCols + pos.x;
+			if(!knowledge.floor[p]) {
+				floors[p] = $('<div>').addClass("floor").css({
+					top: pos.y*rowHeight+5,
+					left: pos.x*colWidth+5,
+					width: colWidth,
+					height: rowHeight
+				}).appendTo(canvasContainer);
+				
+				knowledge.floor[p] = true;
+			} else {
+				floors[p].remove();
+				floors[p] = null;
+				
+				knowledge.floor[p] = false;
 			}
 		}
 		
