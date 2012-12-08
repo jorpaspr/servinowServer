@@ -2,6 +2,8 @@
 	var template = template.PEDIDO;
 	ep.Interfaz.Entidad.PedidoElementoGrafico = function() {
 		this.element = null;
+		this.pedido = null;
+		this.lineaPedidoEG = {};
 		this.create = function(estado, pedido){
 			this.lineasPedidoCont = 0;
 			this.lineasPedidoNextStates = 0;
@@ -14,6 +16,7 @@
 				pedido: pedido
 			};
 			this.element = $(new EJS({url: template}).render(data));
+			this.pedido = pedido;
 			
 			this.listaProductosElement = this.element.find('.listaProductos');
             this.element.data("obj", pedido);
@@ -24,26 +27,17 @@
 				
 			return this;
 		}
-		this.addProducto = function(productoElementGraphic){
+		this.addLineaPedido = function(productoElementGraphic){
+			this.lineaPedidoEG['lineaPedido'+productoElementGraphic.lineaPedido.id] = productoElementGraphic;
 			this.listaProductosElement.append(productoElementGraphic.element);
 			
 			this.lineasPedidoCont++;
 			
 			this.updateProgressBar();
 		}
-		this.changeProducto = function(productoElementGraphic, pedidoElementGraphic){
-			this.lineasPedidoNextStates++;
-			pedidoElementGraphic.addProducto(productoElementGraphic);
-			
-			this.updateProgressBar();
-			if(this.lineasPedidoNextStates >= this.lineasPedidoTotal) {
-				var elementGraphic = this;
-				setTimeout(function(){
-					elementGraphic.element.remove();
-					delete elementGraphic;
-				},1000);
-			}
-			
+		this.remove = function(){
+			this.element.remove();
+			delete this;
 		}
 		this.initProgressBar = function(){
 			for(var i = 0; i < this.lineasPedidoTotal; ++i){
@@ -58,6 +52,23 @@
 		this.updateProgressBar = function(){
 			var percent = this.lineasPedidoNextStates/this.lineasPedidoTotal;
 			this.progressElement.css("width", (percent*100)+"%");
+		}
+		this.getLineaPedido = function(lineaPedido){
+			return this.lineaPedidoEG['lineaPedido'+lineaPedido.id];
+			
+		}
+		this.removeLineaPedido = function(productoElementGraphic){
+			this.lineasPedidoNextStates++;
+			this.getLineaPedido(productoElementGraphic.lineaPedido).element.detach();
+			delete this.lineaPedidoEG['lineaPedido'+productoElementGraphic.lineaPedido.id];
+			
+			this.updateProgressBar();
+			if(this.lineasPedidoNextStates >= this.lineasPedidoTotal) {
+				var elementGraphic = this;
+				setTimeout(function(){
+					elementGraphic.remove();
+				},1000);
+			}
 		}
 	}
 })(ep, template);

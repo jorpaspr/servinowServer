@@ -34,6 +34,10 @@
             return elements["panel"+panel.tipo].estados["estado"+estado.tipo];
             
         }
+		this.existEstadoElement = function(panel, estado){
+			var estadoElement = this.getEstadoElement(panel, estado);
+            return (typeof(estadoElement) != 'undefined');
+        }
         this.deleteEstadoElement = function(panel, estado){
             elements["panel"+panel.tipo].estados["estado"+estado.tipo] = null;
         }

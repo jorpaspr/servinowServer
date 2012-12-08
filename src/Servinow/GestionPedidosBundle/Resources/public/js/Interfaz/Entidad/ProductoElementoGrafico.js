@@ -23,5 +23,12 @@
 		this.enableNextStateButtonLineaPedido = function(){
 			this.nextStateButtonElement.attr("disabled", false);	
 		}
+		this.disableNextStateButtonLineaPedido = function(){
+			this.nextStateButtonElement.attr("disabled", true);	
+		}
+		this.remove = function(){
+			this.element.remove();
+			delete this;
+		}
 	}
 })(ep, template);

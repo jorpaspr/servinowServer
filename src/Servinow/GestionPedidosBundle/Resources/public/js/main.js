@@ -43,9 +43,10 @@ $(document).ready(function() {
 		var panel = $(this).parents(".panel").data("obj");
 		var estado = lineaPedido.estado.tipo+1;
 		
-		im.saveUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado, function(data){
-			im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado);
-		});
+		im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado);
+		/*im.saveUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado, function(data){
+			
+		});*/
 	});
         
 	/*var producto1 = {
