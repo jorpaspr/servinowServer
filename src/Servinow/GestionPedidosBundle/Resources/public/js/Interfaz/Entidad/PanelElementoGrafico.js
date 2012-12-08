@@ -28,7 +28,7 @@
 			elementParent.append(this.element);
 		}
 		this.hasEstado = function(estado){
-			return (typeof(this.getEstado(estado)) == undefined)? false: true;
+			return (typeof(this.getEstado(estado)) == 'undefined')? false: true;
 		}
 		this.getEstado = function(estado) {
 			return this.estadosEG['estado'+estado.tipo];			

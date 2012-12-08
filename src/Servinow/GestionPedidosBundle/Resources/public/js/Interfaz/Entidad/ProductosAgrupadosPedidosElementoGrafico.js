@@ -13,7 +13,7 @@
 			this.element.append(pedidoElementoGrafico.element);
 		}
 		this.hasPedido = function(pedido){
-			return (typeof(this.pedidosEG['pedido'+pedido.id]) == undefined)? false: true;
+			return (typeof(this.pedidosEG['pedido'+pedido.id]) == 'undefined')? false: true;
 		}
 		this.getPedido = function(pedido){
 			return this.pedidosEG['pedido'+pedido.id];
