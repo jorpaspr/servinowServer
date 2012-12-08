@@ -1,5 +1,26 @@
 {% extends 'ServinowMovimientosDeCajaBundle::General/base.html.twig' %}
-
 {% block central_movimientos_caja_general%}
 {# TODO#}
+<table id="ingresos">
+    <thead>
+        <tr>
+            <th>Dia</th>
+            <th>Ingresos</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in dia_pedidos %}
+            <tr>
+                <td>{{pedido.fecha}}</td>
+                <td>{{pedido.total}} &euro;</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h2>Ingresos diarios</h2>
+<script type="text/javascript">
+	$(function(){
+		$("#ingresos").createHistogram(600,400);
+	});
+</script>
 {% endblock %}

@@ -4,14 +4,21 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/base.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/movimientos.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/buttons.css') }}">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />    
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/servinowmovimientosdecaja/css/movimientos_table.css')}}" />
 {% endblock %}
     
 {% block javascripts %}
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-    <script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{asset('bundles/servinowmovimientosdecaja/js/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript">
         $(function() {
-            $( "#datepicker_fecha_dia" ).datepicker();
+            $( "#datepicker_fecha_dia" ).datepicker({
+                defaultDate: "+1w",
+                numberOfMonths: 1,
+                dateFormat: "yymmdd", 
+                maxDate: 0
+            });
         });
     </script>
 {% endblock %}
@@ -24,10 +31,11 @@
         {% trans %}daily.summary {%endtrans%}
     </h1>
     <div id="nav_movimientos_caja_movimientos_container">
-            <p>
-                Dia: 
-                <input type="text" id="datepicker_fecha_dia" />
-            </p>
+            <form id="fecha">
+                <label for="datepicker_fecha_dia">Dia:</label> 
+                <input type="text" name="fecha" id="datepicker_fecha_dia" value="{{fecha}}"/>
+                <button type="submit" class="btn">Buscar</button>
+            </form>
     </div>
 </div>
 

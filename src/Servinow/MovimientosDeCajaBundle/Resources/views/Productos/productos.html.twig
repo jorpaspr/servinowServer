@@ -1,9 +1,8 @@
 {% extends 'ServinowMovimientosDeCajaBundle::Productos/base.html.twig' %}
 
 {%block central_movimientos_caja_productos%}
-{# TO DO
-#}
-<table id="topProductos" hidden="true">
+<h2>Productos por cantidad vendida</h2>
+<table id="topProductosCantidad">
     <thead>
         <tr>
             <th>Producto</th>
@@ -11,46 +10,35 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Chivito</td>
-            <td>60</td>
-        </tr>
-        <tr>
-            <td>Cocacola</td>
-            <td>45</td>
-        </tr>
-        <tr>
-            <td>Macarrones</td>
-            <td>32</td>
-        </tr>
-        <tr>
-            <td>Filete con guarnicion</td>
-            <td>30</td>
-        </tr>
-        <tr>
-            <td>Sandwich mixto</td>
-            <td>26</td>
-        </tr>
-        <tr>
-            <td>Merluza con guarnicion</td>
-            <td>26</td>
-        </tr>
-        <tr>
-            <td>Hamburgesa con patatas</td>
-            <td>24</td>
-        </tr>
-        <tr>
-            <td>Cerveza</td>
-            <td>24</td>
-        </tr>
-        <tr>
-            <td>Calamares en su tinta</td>
-            <td>12</td>
-        </tr>
-        <tr>
-            <td>Gazpacho manchego</td>
-            <td>8</td>
-        </tr>
+        {% for producto in productosCantidad %}
+            <tr>
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.total}}</td>
+            </tr>
+        {% endfor %}
     </tbody>
-</table>​
+</table>
+<script>
+    $("#topProductosCantidad").createPieChart(490,300,380,150,100,'#fff');
+</script>
+<h2>Productos por ingresos generados</h2>
+<table id="topProductosIngresos">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Ingresos</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for producto in productosIngresos %}
+            <tr>
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.total}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+    $("#topProductosIngresos").createPieChart(490,300,380,150,100,'#fff');
+</script>
 {%endblock%}
