@@ -76,4 +76,18 @@ class ProductoRepository extends EntityRepository
                 ->leftJoin('l.producto', 'prod');
         return $qb->getQuery()->getSingleResult();
     }
+    
+    public function setCategoriasOfProducto($restauranteId, $productoId, $categoriasId) {
+        $repository = $this->getEntityManager()->getRepository("ServinowEntitiesBundle:Categoria");
+        
+        $categorias = $repository->findCategoriasByRestaurante($restauranteId);        
+        
+        foreach ($categorias as $categoria) {
+            $repository->removeProductoFromCategoria($categoria->getId(), $productoId);
+        }
+        
+        foreach ($categoriasId as $categoriaId) {
+            $repository->addProductoToCategoria($categoriaId, $productoId);
+        }
+    }
 }

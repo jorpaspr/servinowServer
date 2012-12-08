@@ -51,6 +51,10 @@ class DefaultController extends Controller
             $productoDisponible=false;
         }
         
+        if($request->request->has('categorias')){
+            $categoriasId = $request->request->get('categorias');
+        }
+        
         
         if($tipo == "nuevo")
         {
@@ -76,8 +80,15 @@ class DefaultController extends Controller
         {
             $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
             $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Producto")
-                ->updateProductoById($restaurantID, $platoID, $productoNombre, $productoDescripcion,
-                        $productoPrecio, $productoDisponible);            
+                    ->updateProductoById($restaurantID, $platoID, $productoNombre,
+                            $productoDescripcion, $productoPrecio, $productoDisponible);
+            
+            if (!isset($categoriasId)) {
+                $categoriasId = array();
+            }
+            $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Producto")
+                    ->setCategoriasOfProducto($restaurantID, $platoID, $categoriasId);
+            
         }
         else if($tipo == "descartarEditar")
         {
@@ -86,9 +97,15 @@ class DefaultController extends Controller
         else if($tipo == "aceptarNuevo")
         {
             $url = $this->generateUrl('servinow_platos_homepage', array('restaurantID' => $restaurantID));
-            $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Plato")
-                ->insertPlato($restaurantID, $productoNombre, $productoDescripcion,
-                        $productoPrecio, $productoDisponible);
+            $platoID = $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Plato")
+                    ->insertPlato($restaurantID, $productoNombre, $productoDescripcion,
+                            $productoPrecio, $productoDisponible);
+            
+            if (!isset($categoriasId)) {
+                $categoriasId = array();
+            }
+            $this->getDoctrine()->getRepository("ServinowEntitiesBundle:Producto")
+                    ->setCategoriasOfProducto($restaurantID, $platoID, $categoriasId);
         }
         else if($tipo == "descartarNuevo")
         {

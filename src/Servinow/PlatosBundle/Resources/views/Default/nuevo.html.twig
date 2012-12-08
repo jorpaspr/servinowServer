@@ -22,7 +22,7 @@
                 <td>Categorías<br/>
                     <div class="categorias">
                     {% for categoria in categorias %}
-                        <input type="checkbox" name="categoria" value="{{categoria.id}}" />{{categoria.nombre}}<br />
+                        <input type="checkbox" name="categorias[]" value="{{categoria.id}}" />{{categoria.nombre}}<br />
                     {% endfor %}
                     </div>
                 </td>

@@ -37,11 +37,15 @@ class PlatoRepository extends EntityRepository
      /*   $producto->setPrecio(doubleval($doublePrecio)); */
         $plato->setRestaurante($restaurante);
         $plato->setDisponible($disponible);
-        $plato->setImagen("asd");
+        $plato->setImagen("meal.jpg");
         $plato->SetPrecio(doubleval($precio));
         $em->persist($plato);
         
         $em->flush();
+        
+        /* Obtengo el id del plato recién insertado */
+        $em->refresh($plato);
+        return $plato->getId();
     }
     
     
