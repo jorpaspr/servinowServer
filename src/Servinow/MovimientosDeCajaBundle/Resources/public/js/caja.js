@@ -3,7 +3,7 @@
  */
     if ( typeof (jQuery) == 'undefined' || typeof (Raphael) == 'undefined') {
         alert("jQuery and Raphael libs required");
-        return;
+        //return; //WRONG outside a function
     }
     Raphael.fn.pieChart = function(cx, cy, r, values, labels, stroke) {
         var paper = this,
