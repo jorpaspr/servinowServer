@@ -243,6 +243,7 @@ if(!_servinow)
 			
 			newObject.data('id', def.id);
 			newObject.find('.removeHandler').click(function(){
+				console.log("click!");
 				removeObject(newObject);
 			});
 			
@@ -260,6 +261,13 @@ if(!_servinow)
 							top: def.y*rowHeight +5,
 							left: def.x*colWidth +5
 						});
+				}
+			});
+			
+			newObject.tooltip({
+				delay: 0,
+				bodyHandler: function(){
+					return $('<p>').text(def.name);
 				}
 			});
 			
@@ -295,8 +303,8 @@ if(!_servinow)
 			var withID = function(){
 				newObjectTitle.text(def.id);
 				newObject.data('id', def.id);
-				newObject.find('.removeHandler').click(function(){
-					removeObject(newObject);
+				var h = newObject.find('.removeHandler').click(function(){
+					removeTable(newObject);
 				});
 			}
 			
@@ -333,6 +341,13 @@ if(!_servinow)
 				newObject.removeClass('square wide').addClass('tall');
 			}
 			
+			newObject.tooltip({
+				delay: 0,
+				bodyHandler: function(){
+					return $('<p>').text('Comensales de '+def.min+" a "+def.max+" comensales");
+				}
+			});
+			
 			canvasContainer.append(newObject);
 		}
 		
@@ -343,10 +358,30 @@ if(!_servinow)
 				if(id == knowledge.objects[i].id) { 
 					knowledge.objects.splice(i, 1);
 					el.remove();
+					
+					//Workarround
+					$('#tooltip').hide();
 
 					return;
 				}
 			}
+		}
+		
+		var removeTable = function(el){
+			for(var i=0; i<knowledge.tables.length; i++){
+				var id = el.data('id');
+
+				if(id == knowledge.tables[i].id) { 
+					knowledge.tables.splice(i, 1);
+					el.remove();
+					
+					//Workarround
+					$('#tooltip').hide();
+
+					return;
+				}
+			}
+			
 		}
 	}
 })(_servinow);
