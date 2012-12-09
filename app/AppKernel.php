@@ -21,8 +21,10 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Servinow\NavigationBundle\ServinowNavigationBundle(),
             new Servinow\GestionPedidosBundle\ServinowGestionPedidosBundle(),
+            new Servinow\RestaurantDrawerBundle\ServinowRestaurantDrawerBundle(),
             new Servinow\MovimientosDeCajaBundle\ServinowMovimientosDeCajaBundle(),
             new Servinow\EntitiesBundle\ServinowEntitiesBundle(),
+            new Servinow\PlatosBundle\ServinowPlatosBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
