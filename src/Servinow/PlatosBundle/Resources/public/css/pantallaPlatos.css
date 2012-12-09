@@ -6,16 +6,7 @@
         Purpose of the stylesheet follows.
 */
 
-root { 
-    display: block;
-}
-
-html {
-    font-family: sans-serif;
-    background-color: #f5f5f5;
-}
-
-td {
+#content td {
     padding: 10px;
 }
 
@@ -37,15 +28,7 @@ select.listadoPlatos {
     width: 300px;
 }
 
-#footer{
-    position: fixed;
-    left: 0px;
-    bottom: 0px;
-    height: 30px;
-    width: 100%;
-}
-
-h2 {
+#content h2 {
     margin: 20px;
     color: #d94a38;
     font-size: 1.5em;
