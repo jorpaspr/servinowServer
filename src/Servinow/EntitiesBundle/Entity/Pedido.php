@@ -22,9 +22,9 @@ class Pedido
     private $id;
 
     /**
-     * @var \DateTime $fecha
+     * @var integer $fecha
      *
-     * @ORM\Column(name="fecha", type="datetime")
+     * @ORM\Column(name="fecha", type="integer")
      */
     private $fecha;
 
@@ -41,6 +41,13 @@ class Pedido
      * @ORM\Column(name="confirmado", type="boolean")
      */
     private $confirmado;
+    
+    /**
+     * @var boolean $metodoPago
+     *
+     * @ORM\Column(name="metodo_pago", type="string", length=255)
+     */
+    private $metodoPago;
 
     /**
      * @ORM\OneToMany(targetEntity="LineaPedido", mappedBy="pedido")
@@ -72,7 +79,7 @@ class Pedido
     /**
      * Set fecha
      *
-     * @param \DateTime $fecha
+     * @param integer $fecha
      * @return Pedido
      */
     public function setFecha($fecha)
@@ -85,7 +92,7 @@ class Pedido
     /**
      * Get fecha
      *
-     * @return \DateTime 
+     * @return integer 
      */
     public function getFecha()
     {
@@ -222,5 +229,28 @@ class Pedido
     public function getMesa()
     {
         return $this->mesa;
+    }
+
+    /**
+     * Set metodoPago
+     *
+     * @param string $metodoPago
+     * @return Pedido
+     */
+    public function setMetodoPago($metodoPago)
+    {
+        $this->metodoPago = $metodoPago;
+    
+        return $this;
+    }
+
+    /**
+     * Get metodoPago
+     *
+     * @return string 
+     */
+    public function getMetodoPago()
+    {
+        return $this->metodoPago;
     }
 }

@@ -1,0 +1,75 @@
+{% extends 'ServinowMovimientosDeCajaBundle::base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/productos.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowmovimientosdecaja/css/buttons.css') }}">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+{% endblock %}
+    
+{% block javascripts %}
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>    
+    <script src="https://raw.github.com/DmitryBaranovskiy/raphael/master/raphael-min.js"></script>
+    <script src="{{ asset('bundles/servinowmovimientosdecaja/js/caja.js') }}"></script>
+    <script>
+        $(function() {
+            $( "#datepicker_fecha_inicio" ).datepicker({
+                defaultDate: "+1w",
+                numberOfMonths: 1,
+                dateFormat: "yymmdd",
+                maxDate: 0,
+                onClose: function( selectedDate ) {
+                    $( "#datepicker_fecha_fin" ).datepicker( "option", "minDate", selectedDate );
+                }
+            });
+            $( "#datepicker_fecha_fin" ).datepicker({
+                defaultDate: "+1w",
+                numberOfMonths: 1,
+                dateFormat: "yymmdd",
+                maxDate: 0,
+                onClose: function( selectedDate ) {
+                    $( "#datepicker_fecha_inicio" ).datepicker( "option", "maxDate", selectedDate );
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block class_li_productos %} class="selected" {%endblock%}
+
+{% block central_movimientos_caja %}
+<div id="nav_movimientos_caja_productos">
+    <h1 id="titulo_movimientos_caja_productos">
+        {% trans %}products {%endtrans%}
+    </h1>
+    <div id="nav_movimientos_caja_productos_container">
+        
+            <form id="fechas">
+                <label for="datepicker_fecha_inicio">Fecha inicio:</label> 
+                <input type="text" name="fecha_inicio" id="datepicker_fecha_inicio" value="{{fecha_inicio}}"/>
+                <label for="datepicker_fecha_fin">Fecha fin:</label>           
+                <input type="text" name="fecha_fin" id="datepicker_fecha_fin" value="{{fecha_fin}}"/>
+                <button type="submit" class="btn">Buscar</button>
+            </form>
+    </div>
+     <div id="productos_nav">
+                <form class="formulario_buscar">
+                    <input type="text" name="producto" id="buscar_producto" 
+                        placeholder="{%trans%}enter.product{%endtrans%}">
+                    <button type="submit" class="btn button_buscar"
+                    <button type="submit" class="">{%trans%}search{%endtrans%}</button>
+                </form>
+                <a href="{{path('servinow_movimientos_de_caja_productos', 
+                    {'restaurantID': restaurantID})}}"
+                class="btn a_button"
+                >
+                    {%trans%}top10{%endtrans%}
+        </a>
+    </div>
+</div>
+
+<div id="central_movimientos_caja_productos">
+    {%block central_movimientos_caja_productos%}
+    {%endblock%}
+</div>
+{% endblock %}

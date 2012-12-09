@@ -1,0 +1,111 @@
+/* 
+    Document   : general
+    Created on : 01-dic-2012, 16:12:33
+    Author     : escrichov
+    Description:
+        Purpose of the stylesheet follows.
+*/
+#central_movimientos_caja {
+	min-height: 530px !important;
+}
+#sidebar_left{
+    position: relative;
+    float: left;
+    background-color: #DCDCDC;
+    width: 300px;
+    height:auto;
+    min-height: 480px;
+}
+
+#central_sidebar{
+    position: relative;
+    float: left;
+    width: 1000px;
+    min-height: 480px;
+    height:auto;
+}
+
+#nav_movimientos_caja_general{
+    position: relative;
+    float: left;
+    background-color: #E6E6E6;
+    width: 1000px;
+    height: 70px;
+}
+
+#titulo_movimientos_caja_general{
+    margin: 10px 0;
+    font-family: sans-serif;
+    font-weight: bold;
+    line-height: 40px;
+    color: inherit;
+    font-size: 38.5px;
+    text-rendering: optimizelegibility;
+}
+
+.a_button{
+  color: #0088cc;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: sans-serif;
+  font-weight: bold;
+  width: 130px;
+  height: 30px;
+  text-align: center;
+  margin: auto;
+}
+
+#buttons_ul_movimientos_caja_general{
+    position: relative;
+    background-color: #F0F0F0;
+    border: 1px solid #EAEAEA;
+    border-bottom-color: #CACACA;
+    border-radius: 3px;
+}
+
+#buttons_ul_movimientos_caja_general li{
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+    border:0;
+}
+
+#buttons_ul_movimientos_caja_general li > a {
+    text-align: center;
+    line-height: 35px;
+    margin-top: 30px;
+}
+
+#buttons_ul_movimientos_caja_general li:last-child > a {
+    margin-bottom: 30px;
+}
+
+#nav_movimientos_caja_general_container{
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 800px;
+}
+
+#nav_movimientos_caja_general p{
+    float: left;
+    margin-left: 100px;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 17px;
+}
+
+#nav_movimientos_caja_general p > input{
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    font-weight: normal;
+    height: 25px;
+}
+
+#central_movimientos_caja_general{
+    position: relative;
+    float: left;
+    background-color: #FAFAFA;
+    width: 1000px;
+    height: 410px;
+}

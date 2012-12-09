@@ -25,8 +25,8 @@
 							<ul class="submenu">
 								<li><a href="#TODO" >{{ "Creación de platos"  | trans }}</a></li>
 								{#<li><a href="#TODO" >{{ "Creación de menús"  | trans }}</a></li>#}
-								<li><a href="#TODO" >{{ "Facturación y estadísticas"  | trans }}</a></li>
-								<li><a href="#TODO" >{{ "Espacio del restaurante"  | trans }}</a></li>
+								<li><a href="{{path('servinow_movimientos_de_caja_general', {'restaurantID': restaurantID})}}" >{{ "Facturación y estadísticas"  | trans }}</a></li>
+								<li><a href="{{path('servinow_restaurant_drawer_homepage', {'restaurantID' : restaurantID} )}}" >{{ "Espacio del restaurante"  | trans }}</a></li>
 								<li><a href="#TODO" >{{ "Organizar mi restaurante"  | trans }}</a></li>
 							</ul>
 						</li>
@@ -42,5 +42,7 @@
 				<p>Servinow - HMI - UPV</p>
 			</footer>
 		</div>
+            {%block javascripts_end_body %}
+            {%endblock %}
 	</body>
 </html>
