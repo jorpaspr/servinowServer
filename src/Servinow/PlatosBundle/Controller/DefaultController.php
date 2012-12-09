@@ -42,7 +42,7 @@ class DefaultController extends Controller
         }
         
         if($request->request->has('precio')){
-            $productoPrecio = $request->request->get('precio');
+            $productoPrecio = str_replace(',', '.', $request->request->get('precio'));
         }
         
         if($request->request->has('disponible')){
