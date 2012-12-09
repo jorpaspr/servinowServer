@@ -19,7 +19,26 @@
 			return panel;
 		}
 		this.cargarPanelCamarero = function(){
-
+			var panelManager = new ep.Manejador.PanelManager();
+			var elementDrawer = new ep.Interfaz.ElementoDrawer();
+			
+			var estados = [];
+			estados.push(ep.Entidad.Estado.COLA);
+			estados[0].finalState = false;
+			estados.push(ep.Entidad.Estado.COCINA);
+			estados[1].finalState = false;
+			estados.push(ep.Entidad.Estado.PREPARADO);
+			estados[2].finalState = false;
+			estados.push(ep.Entidad.Estado.TRANSITO);
+			estados[3].finalState = false;
+			estados.push(ep.Entidad.Estado.SERVIDO);
+			estados[4].finalState = true;
+			
+			var panel = panelManager.add(ep.Constant.COCINERO, estados);
+			
+			elementDrawer.drawPanelCocinero(place, panel);
+			
+			return panel;
 		}
 		this.drawNewPedidos = function(panel, pedidos){
 			for(var i = 0; i < pedidos.length; ++i){

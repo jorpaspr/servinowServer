@@ -20,9 +20,7 @@
 		}
 		this.removePedido = function(pedido){
 			var pedidoElementoGrafico = this.getPedido(pedido);
-			pedidoElementoGrafico.remove();
-			
-			delete this.pedidosEG['pedido'+pedido.id];
+			pedidoElementoGrafico.hide();
 		}
 	}
 })(ep, template);

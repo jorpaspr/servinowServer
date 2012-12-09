@@ -72,5 +72,8 @@
 			return (typeof( this.lineaPedidoEG['lineaPedido'+lineaPedido.id]) == 'undefined')? false: true;
 			
 		}
+		this.hide = function(){
+			this.element.css('display', 'none');
+		}
 	}
 })(ep, template);
