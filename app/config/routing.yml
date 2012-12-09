@@ -2,9 +2,17 @@ servinow_movimientos_de_caja:
     resource: "@ServinowMovimientosDeCajaBundle/Resources/config/routing.yml"
     prefix:   /{restaurantID}/caja
 
+servinow_platos:
+    resource: "@ServinowPlatosBundle/Resources/config/routing.yml"
+    prefix:   /{restaurantID}/platos/
+
 servinow_navigation:
     resource: "@ServinowNavigationBundle/Resources/config/routing.yml"
     prefix:   /{restaurantID}/
+
+servinow_restaurant_drawer:
+    resource: "@ServinowRestaurantDrawerBundle/Resources/config/routing.yml"
+    prefix:   /{restaurantID}/organizador/
 
 # Internal routing configuration to handle ESI
 #_internal:
