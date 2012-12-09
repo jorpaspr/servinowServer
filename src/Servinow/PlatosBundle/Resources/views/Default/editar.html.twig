@@ -14,12 +14,12 @@
     <table>
         <tbody>
             <tr>
-                <td>Nombre<br/><input type="text" name="nombre" value="{{producto.nombre}}" required="required" placeholder="Nombre del plato"/></td>
+                <td>Nombre<br/><input type="text" name="nombre" value="{{producto.nombre}}" required="required" placeholder="Nombre del plato" maxlength="30"/></td>
                 <td></td>
                 <td>Imagen<br/><input type="file"/></td>
             </tr>
             <tr>
-                <td>Descripción<br/><textarea rows="4" name="descripcion" required="required" placeholder="Descripción del plato">{{producto.descripcion}}</textarea></td>
+                <td>Descripción<br/><textarea rows="4" name="descripcion" required="required" placeholder="Descripción del plato" maxlength="500">{{producto.descripcion}}</textarea></td>
                 <td></td>
                 <td>Categorías<br/>
                     <div class="categorias">
