@@ -4,16 +4,18 @@
 		this.element = null;
 		this.pedido = null;
 		this.lineaPedidoEG = {};
-		this.create = function(estado, pedido){
+		this.create = function(estado, pedido, finalState){
 			this.lineasPedidoCont = 0;
 			this.lineasPedidoNextStates = 0;
 			this.lineasPedidoTotal = pedido.lineasPedido.length;
 			
 			this.pedido = pedido;
 			this.estado = estado;
+			this.finalState = finalState;
 			
 			var data = {
-				pedido: pedido
+				pedido: pedido,
+				finalState: finalState
 			};
 			this.element = $(new EJS({url: template}).render(data));
 			this.pedido = pedido;
@@ -50,7 +52,9 @@
 			this.updateProgressBar();
 		}
 		this.updateProgressBar = function(){
-			var percent = this.lineasPedidoNextStates/this.lineasPedidoTotal;
+			var percent = (!this.finalState)
+				? this.lineasPedidoNextStates/this.lineasPedidoTotal
+				: this.lineasPedidoCont/this.lineasPedidoTotal;
 			this.progressElement.css("width", (percent*100)+"%");
 		}
 		this.getLineaPedido = function(lineaPedido){
@@ -63,12 +67,10 @@
 			delete this.lineaPedidoEG['lineaPedido'+productoElementGraphic.lineaPedido.id];
 			
 			this.updateProgressBar();
-			if(this.lineasPedidoNextStates >= this.lineasPedidoTotal) {
-				var elementGraphic = this;
-				setTimeout(function(){
-					elementGraphic.remove();
-				},1000);
-			}
+		}
+		this.hasLineaPedido = function(lineaPedido){
+			return (typeof( this.lineaPedidoEG['lineaPedido'+lineaPedido.id]) == 'undefined')? false: true;
+			
 		}
 	}
 })(ep, template);

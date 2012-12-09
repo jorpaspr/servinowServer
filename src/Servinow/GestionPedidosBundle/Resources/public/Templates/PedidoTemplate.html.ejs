@@ -8,8 +8,10 @@
 	<table class="listaProductos">
 		<tr>
 			<td><span>Plato</span></td>
-                        <td><span>Ración</span></td>
-			<td><span>Acción</span></td>
+            <td><span>Ración</span></td>
+			<% if(!finalState) { %>
+				<td><span>Acción</span></td>
+			<% } %>
 		</tr>
 	</table>
 </div>

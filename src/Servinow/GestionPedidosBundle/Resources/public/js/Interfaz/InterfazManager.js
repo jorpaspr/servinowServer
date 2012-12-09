@@ -6,11 +6,11 @@
 			
 			var estados = [];
 			estados.push(ep.Entidad.Estado.COLA);
-			estados[0].botonera = true;
+			estados[0].finalState = false;
 			estados.push(ep.Entidad.Estado.COCINA);
-			estados[1].botonera = true;
+			estados[1].finalState = false;
 			estados.push(ep.Entidad.Estado.PREPARADO);
-			estados[2].botonera = false;
+			estados[2].finalState = true;
 			
 			var panel = panelManager.add(ep.Constant.COCINERO, estados);
 			
@@ -125,7 +125,7 @@
 		}
 		this.saveUpdateEstadoLineaPedido = function(panel, pedido, lineaPedido, estado, onSuccess){
 			var elementDrawer = new ep.Interfaz.ElementoDrawer();
-			elementDrawer.toggleNextStateButtonLineaPedido(panel, pedido, lineaPedido);
+			elementDrawer.disableNextStateButtonLineaPedido(panel, pedido, lineaPedido);
 			
 			var lineaPedidoManager = new ep.Manejador.LineaPedidoManager();
 			lineaPedidoManager.saveUpdateEstado(lineaPedido, estado, onSuccess);

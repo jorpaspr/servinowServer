@@ -69,6 +69,7 @@ class APIController extends Controller
 			$pedido['id'] = $pedidos[$i]->getId();
 			
 			$lineasPedido = $pedidos[$i]->getLineasPedido();
+			$pedido['lineasPedido'] = array();
 			for($j = 0; $j < count($lineasPedido); ++$j){
 				$lineaPedido = array();
 				$lineaPedido['id'] = $lineasPedido[$j]->getId();
@@ -81,8 +82,7 @@ class APIController extends Controller
 				
 				$lineaPedido['producto'] = $producto;
 				
-				$pedido['lineasPedido'][] = $lineaPedido;
-				
+				$pedido['lineasPedido'][] = $lineaPedido;				
 			}
 			$pedidosOut[] = $pedido;			
 		}

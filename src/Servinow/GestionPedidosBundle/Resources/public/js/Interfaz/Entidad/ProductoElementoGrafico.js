@@ -2,10 +2,13 @@
 	var template = template.PRODUCTO;
 	ep.Interfaz.Entidad.ProductoElementoGrafico = function() {
 		this.element = null;
-		this.create = function(lineaPedido){
+		this.create = function(lineaPedido, finalState){
 			this.lineaPedido = lineaPedido;
+			this.finalState = finalState;
+			
 			var data = {
-				lineaPedido: lineaPedido
+				lineaPedido: lineaPedido,
+				finalState: finalState
 			};
 			this.element = $(new EJS({
 				url: template

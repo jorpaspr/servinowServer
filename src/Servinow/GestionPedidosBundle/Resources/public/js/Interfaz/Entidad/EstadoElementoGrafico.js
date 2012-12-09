@@ -4,11 +4,12 @@
 		this.element = null;
 		this.estado = null;
 		this.vistaAgrupadaPedido = null;
-		this.create = function(estado, botonera){
+		this.create = function(estado, finalState){
 			var data = {
 				estado: estado,
-				botonera: botonera
+				finalState: finalState
 			};
+			this.finalState = finalState;
 			this.element = $(new EJS({url: template}).render(data));
 			
 			this.estado = estado;
@@ -43,6 +44,39 @@
 		}
 		this.getPedido = function(pedido){
 			return this.vistaAgrupadaPedido.getPedido(pedido);
+		}
+		this.removePedido = function(pedido){
+			this.vistaAgrupadaPedido.removePedido(pedido);
+		}
+		this.removeLineaPedido = function(pedidoElementGraphic, productoElementGraphic){
+			pedidoElementGraphic.removeLineaPedido(productoElementGraphic);
+			this.decrLineasPedido();
+			
+			this.putTimerToRemovePedido(pedidoElementGraphic);
+		}
+		this.addLineaPedido = function(pedidoElementGraphic, productoElementGraphic){
+			pedidoElementGraphic.addLineaPedido(productoElementGraphic);
+			this.incrLineasPedido();
+			
+			this.putTimerToRemovePedido(pedidoElementGraphic);			
+		}
+		this.putTimerToRemovePedido = function(pedidoElementGraphic){
+			if(this.finalState){
+				if(pedidoElementGraphic.lineasPedidoCont >= pedidoElementGraphic.lineasPedidoTotal) {
+					this.cantidadProduct -= pedidoElementGraphic.lineasPedidoTotal;
+					var estadoElementGraphic = this;
+					setTimeout(function(){
+						estadoElementGraphic.removePedido(pedidoElementGraphic.pedido);
+						estadoElementGraphic.cambiarCantidadProductos();
+					},ep.Constant.TIME_TO_REMOVE_FINAL_ORDER);
+				}	
+			} else {
+				if(pedidoElementGraphic.lineasPedidoNextStates >= pedidoElementGraphic.lineasPedidoTotal) {
+					setTimeout(function(){
+						pedidoElementGraphic.remove();
+					}, ep.Constant.TIME_TO_REMOVE_NOFINAL_ORDER);
+				}				
+			}
 		}
 	}
 })(ep, template);

@@ -18,5 +18,11 @@
 		this.getPedido = function(pedido){
 			return this.pedidosEG['pedido'+pedido.id];
 		}
+		this.removePedido = function(pedido){
+			var pedidoElementoGrafico = this.getPedido(pedido);
+			pedidoElementoGrafico.remove();
+			
+			delete this.pedidosEG['pedido'+pedido.id];
+		}
 	}
 })(ep, template);

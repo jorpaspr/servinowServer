@@ -8,6 +8,9 @@ ep.Interfaz.Entidad = {};
 ep.Manejador = {};
 ep.Constant ={};
 
+ep.Constant.TIME_TO_REMOVE_FINAL_ORDER = 5000;
+ep.Constant.TIME_TO_REMOVE_NOFINAL_ORDER = 1000;
+
 ep.Constant.ESTADO_COLA = 0;
 ep.Constant.ESTADO_COCINA = 1;
 ep.Constant.ESTADO_PREPARADO = 2;
@@ -36,17 +39,16 @@ $(document).ready(function() {
 	var im = new ep.Interfaz.InterfazManager();
 	var em = new ep.Manejador.EventManager();
     
-	em.addEvent(ep.Constant.EVENT_NEXT_STATE, function(e){
+	em.addEventNextState(function(e){
 		e.stopPropagation();
 		var lineaPedido = $(this).parents(".lineaPedido").data("obj");
 		var pedido = $(this).parents(".pedido").data("obj");
 		var panel = $(this).parents(".panel").data("obj");
 		var estado = lineaPedido.estado.tipo+1;
 		
-		im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado);
-		/*im.saveUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado, function(data){
-			
-		});*/
+		im.saveUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado, function(data){
+			im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado);
+		});
 	});
         
 	/*var producto1 = {
@@ -93,8 +95,14 @@ $(document).ready(function() {
 	var pedidos = [pedido1, pedido2];*/
 
 	var panel = im.cargarPanelCocinero($('#content'));
-	im.loadPedidos(function(data){
-		im.drawNewPedidos(panel, data);
+	im.loadPedidos(function(pedidos){
+		im.drawNewPedidos(panel, pedidos);
+	});
+	
+	em.addEventNewOrders(function(){
+		im.loadPedidos(function(pedidos){
+			im.drawNewPedidos(panel, pedidos);
+		});
 	});
 	
         
