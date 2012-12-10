@@ -1,8 +1,12 @@
-{% extends 'ServinowNavigationBundle::Navigation/index.html.twig' %}
+{% extends 'ServinowFacturaBundle::base.html.twig' %}
 
-{% block content %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/servinowfactura/css/base.css') }}">
+{% endblock %}
 
-    <form action="{{ path('servinow_factura_homepage', {'restaurantID': restaurantID}) }}" 
+{% block central_factura %}
+<div id="div_formulario_factura">
+    <form id="formulario_factura" action="{{ path('servinow_factura_homepage', {'restaurantID': restaurantID}) }}" 
               method="post" {{ form_enctype(form) }}>
             {{ form_errors(form) }}
 
@@ -17,10 +21,9 @@
             {{ form_row(form.telefonoMovil) }}
             {{ form_row(form.fax) }}
 
-
             {{ form_rest(form) }}
 
-            <input type="submit" />
+        <input type="submit" value="Guardar" class="boton_guardar"/>
     </form>
-
+</div>
 {% endblock %}
