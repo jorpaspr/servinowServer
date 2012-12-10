@@ -27,11 +27,11 @@ ep.Constant.EVENT_NEXT_STATE = 0;
 
 
 var template = {}
-template.PANEL = "../../../bundles/servinowgestionpedidos/Templates/PanelTemplate.html.ejs";
-template.ESTADO = "../../../bundles/servinowgestionpedidos/Templates/EstadoTemplate.html.ejs";
-template.PEDIDO = "../../../bundles/servinowgestionpedidos/Templates/PedidoTemplate.html.ejs";
-template.PRODUCTO = "../../../bundles/servinowgestionpedidos/Templates/ProductoFilaTemplate.html.ejs";
-template.PRODUCTOSAGRUPADOSPEDIDOS = "../../../bundles/servinowgestionpedidos/Templates/ProductosAgrupadosPedidosTemplate.html.ejs";
+template.PANEL = "../../../../bundles/servinowgestionpedidos/Templates/PanelTemplate.html.ejs";
+template.ESTADO = "../../../../bundles/servinowgestionpedidos/Templates/EstadoTemplate.html.ejs";
+template.PEDIDO = "../../../../bundles/servinowgestionpedidos/Templates/PedidoTemplate.html.ejs";
+template.PRODUCTO = "../../../../bundles/servinowgestionpedidos/Templates/ProductoFilaTemplate.html.ejs";
+template.PRODUCTOSAGRUPADOSPEDIDOS = "../../../../bundles/servinowgestionpedidos/Templates/ProductosAgrupadosPedidosTemplate.html.ejs";
 
 $(document).ready(function() {
 	// Comprobar si el usuario es un camarero o cocinero
@@ -94,7 +94,13 @@ $(document).ready(function() {
         
 	var pedidos = [pedido1, pedido2];*/
 
-	var panel = im.cargarPanelCocinero($('#content'));
+	var panel;
+        if(ep.panelActivo == ep.Constant.COCINERO){
+            panel = im.cargarPanelCocinero($('#content'));
+        } else{
+             panel = im.cargarPanelCamarero($('#content'));
+        }
+        
 	im.loadPedidos(function(pedidos){
 		im.drawNewPedidos(panel, pedidos);
 	});

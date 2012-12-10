@@ -18,7 +18,7 @@
 			
 			return panel;
 		}
-		this.cargarPanelCamarero = function(){
+		this.cargarPanelCamarero = function(place){
 			var panelManager = new ep.Manejador.PanelManager();
 			var elementDrawer = new ep.Interfaz.ElementoDrawer();
 			
