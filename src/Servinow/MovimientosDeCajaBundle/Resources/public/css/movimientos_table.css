@@ -577,3 +577,12 @@ div.box {
 	border: 1px solid #8080FF;
 	background-color: #E5E5FF;
 }
+
+.tabla_producto_id{
+    width: 50% !important;
+    float:left;
+}
+
+.tabla_producto_id tr{
+    text-align: center;
+}
