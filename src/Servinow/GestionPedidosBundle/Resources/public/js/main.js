@@ -34,38 +34,38 @@ template.PRODUCTO = "../../../../bundles/servinowgestionpedidos/Templates/Produc
 template.PRODUCTOSAGRUPADOSPEDIDOS = "../../../../bundles/servinowgestionpedidos/Templates/ProductosAgrupadosPedidosTemplate.html.ejs";
 
 $(document).ready(function() {
-	// Comprobar si el usuario es un camarero o cocinero
+    // Comprobar si el usuario es un camarero o cocinero
 
-	var im = new ep.Interfaz.InterfazManager();
-	var em = new ep.Manejador.EventManager();
+    var im = new ep.Interfaz.InterfazManager();
+    var em = new ep.Manejador.EventManager();
     
-	em.addEventNextState(function(e){
-		e.stopPropagation();
-		var lineaPedido = $(this).parents(".lineaPedido").data("obj");
-		var pedido = $(this).parents(".pedido").data("obj");
-		var panel = $(this).parents(".panel").data("obj");
-		var estado = lineaPedido.estado.tipo+1;
+    em.addEventNextState(function(e){
+	e.stopPropagation();
+	var lineaPedido = $(this).parents(".lineaPedido").data("obj");
+	var pedido = $(this).parents(".pedido").data("obj");
+	var panel = $(this).parents(".panel").data("obj");
+	var estado = lineaPedido.estado.tipo+1;
 		
-		im.saveUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado, function(data){
-			im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado);
-		});
+	im.saveUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado, function(data){
+	    im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado);
 	});
+    });
 
-	var panel;
-        if(ep.panelActivo == ep.Constant.COCINERO){
-            panel = im.cargarPanelCocinero($('#content'));
-        } else{
-             panel = im.cargarPanelCamarero($('#content'));
-        }
+    var panel;
+    if(ep.panelActivo == ep.Constant.COCINERO){
+	panel = im.cargarPanelCocinero($('#content'));
+    } else{
+	panel = im.cargarPanelCamarero($('#content'));
+    }
         
-	im.loadPedidos(function(pedidos){
-		im.drawNewPedidos(panel, pedidos);
-	});
+    im.loadPedidos(function(pedidos){
+	im.drawNewPedidos(panel, pedidos);
+    });
 	
-	em.addEventNewOrders(function(){
-		im.loadPedidos(function(pedidos){
-			im.drawNewPedidos(panel, pedidos);
-		});
+    em.addEventNewOrders(function(){
+	im.loadPedidos(function(pedidos){
+	    im.drawNewPedidos(panel, pedidos);
 	});
+    });
 	
 });
