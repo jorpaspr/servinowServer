@@ -50,49 +50,6 @@ $(document).ready(function() {
 			im.drawUpdateEstadoLineaPedido(panel, pedido, lineaPedido, estado);
 		});
 	});
-        
-	/*var producto1 = {
-		id: 1,
-		nombre : "Macarrones con queso",
-		tipo: ep.Constant.PLATO
-	};
-        
-	var producto2 = {
-		id: 2,
-		nombre : "Gazpacho",
-		tipo: ep.Constant.PLATO
-	};
-        
-	var lineaPedido1 = {
-		id: 1,
-		producto : producto1,
-		cantidad : 1,
-		estado: ep.Constant.ESTADO_COLA
-	};
-	var lineaPedido2 = {
-		id: 2,
-		producto : producto2,
-		cantidad : 2,
-		estado: ep.Constant.ESTADO_COCINA
-	};
-	var lineaPedido3 = {
-		id: 3,
-		producto : producto1,
-		cantidad : 1,
-		estado: ep.Constant.ESTADO_PREPARADO
-	};
-        
-	var pedido1 = {
-		id: 1,
-		lineasPedido : [lineaPedido1, lineaPedido2]
-	};
-        
-	var pedido2 = {
-		id: 2,
-		lineasPedido : [lineaPedido3]
-	};
-        
-	var pedidos = [pedido1, pedido2];*/
 
 	var panel;
         if(ep.panelActivo == ep.Constant.COCINERO){
@@ -110,9 +67,5 @@ $(document).ready(function() {
 			im.drawNewPedidos(panel, pedidos);
 		});
 	});
-	
-        
-// o	
-//im.cargarPanelCamaero();
 	
 });

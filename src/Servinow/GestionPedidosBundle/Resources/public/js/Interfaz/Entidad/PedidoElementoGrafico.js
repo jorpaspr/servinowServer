@@ -75,5 +75,8 @@
 		this.hide = function(){
 			this.element.css('display', 'none');
 		}
+                this.show = function(){
+                    this.element.css('display', 'block');
+                }
 	}
 })(ep, template);

@@ -55,11 +55,33 @@
 			this.putTimerToRemovePedido(pedidoElementGraphic);
 		}
 		this.addLineaPedido = function(pedidoElementGraphic, productoElementGraphic){
-			pedidoElementGraphic.addLineaPedido(productoElementGraphic);
+			pedidoElementGraphic.show();
+                        pedidoElementGraphic.addLineaPedido(productoElementGraphic);
 			this.incrLineasPedido();
-			
-			this.putTimerToRemovePedido(pedidoElementGraphic);			
+                        
+                        if(this.finalState){
+				if(pedidoElementGraphic.lineasPedidoCont >= pedidoElementGraphic.lineasPedidoTotal) {
+                                    pedidoElementGraphic.hide();
+                                    this.cantidadProduct -= pedidoElementGraphic.lineasPedidoCont;
+                                    this.cambiarCantidadProductos();
+				}	
+			} else {
+				if(pedidoElementGraphic.lineasPedidoNextStates >= pedidoElementGraphic.lineasPedidoTotal) {
+                                    pedidoElementGraphic.hide();
+				}				
+			}
 		}
+                this.addLineaPedidoFromEstado = function(pedidoElementGraphic, productoElementGraphic){
+                    pedidoElementGraphic.show();
+                    if(this.finalState){
+                        productoElementGraphic.create(productoElementGraphic.lineaPedido, this.finalState);
+                    }
+                    
+                    pedidoElementGraphic.addLineaPedido(productoElementGraphic);
+                    this.incrLineasPedido();
+                    
+                    this.putTimerToRemovePedido(pedidoElementGraphic);
+                }
 		this.putTimerToRemovePedido = function(pedidoElementGraphic){
 			if(this.finalState){
 				if(pedidoElementGraphic.lineasPedidoCont >= pedidoElementGraphic.lineasPedidoTotal) {
