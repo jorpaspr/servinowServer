@@ -1,0 +1,26 @@
+{% extends 'ServinowNavigationBundle::Navigation/index.html.twig' %}
+
+{% block content %}
+
+    <form action="{{ path('servinow_factura_homepage', {'restaurantID': restaurantID}) }}" 
+              method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
+
+            {{ form_row(form.nombre) }}
+            {{ form_row(form.nombreCompletoTitular) }}
+            {{ form_row(form.NIFTitular) }}
+            {{ form_row(form.direccion) }}
+            {{ form_row(form.ciudad) }}
+            {{ form_row(form.codigoPostal) }}
+            {{ form_row(form.provincia) }}
+            {{ form_row(form.telefonoFijo) }}
+            {{ form_row(form.telefonoMovil) }}
+            {{ form_row(form.fax) }}
+
+
+            {{ form_rest(form) }}
+
+            <input type="submit" />
+    </form>
+
+{% endblock %}

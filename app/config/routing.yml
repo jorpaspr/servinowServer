@@ -1,6 +1,6 @@
 servinow_factura:
     resource: "@ServinowFacturaBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{restaurantID}/factura
 
 servinow_movimientos_de_caja:
     resource: "@ServinowMovimientosDeCajaBundle/Resources/config/routing.yml"
