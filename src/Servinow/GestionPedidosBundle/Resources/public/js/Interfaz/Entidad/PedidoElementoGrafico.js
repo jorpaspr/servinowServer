@@ -26,6 +26,7 @@
 	    this.element.data("obj", pedido);
 	    this.progressBarElement = this.element.find('.progressbar');
 	    this.progressElement = this.element.find('.progressbar .progress');
+	    this.percentElement = this.element.find('.progressbar .progress .percent');
 			
 	    this.initProgressBar();
 				
@@ -57,7 +58,10 @@
 	    var percent = (!this.finalState)
 	    ? this.lineasPedidoNextStates/this.lineasPedidoTotal
 	    : this.lineasPedidoCont/this.lineasPedidoTotal;
-	    this.progressElement.css("width", (percent*100)+"%");
+	    var percentText = (percent*100)+"%";
+	    this.progressElement.css("width", percentText);
+	    this.percentElement.text(percentText);
+	    
 	}
 	this.getLineaPedido = function(lineaPedido){
 	    return this.lineaPedidoEG['lineaPedido'+lineaPedido.id];

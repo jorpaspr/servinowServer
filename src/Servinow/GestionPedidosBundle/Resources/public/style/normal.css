@@ -1,5 +1,5 @@
 .panel {
-    margin: 10px;
+    margin: 25px 0;
     overflow: hidden;
 
 }
@@ -10,9 +10,10 @@
 }
 
 .tituloPanelEstado {
+    background-color: #DDD;
     text-align: center;
     overflow: hidden;
-    height: 25px;
+    padding: 10px;
 
 }
 
@@ -29,6 +30,7 @@
 .contentDiv{
     padding: 5px 0;
     clear:both;
+    background-color: #EEE;
 }
 
 .pedido {
@@ -36,7 +38,7 @@
     width: 230px;
     border: 1px solid #EEE;
     background-image:url('../../../../web/bundles/servinowgestionpedidos/img/greygradient.jpg');
-
+    margin: 0 auto;
 }
 
 .pedidoTitulo {
@@ -77,16 +79,32 @@
 
 .listaProductos > tbody > tr > td {
     padding: 2px;
+    text-align: center;
 }
 
 .progressbar {
     height: 25px;
     background-color: #FFF;
+    border: 1px solid #FAFAFA;
 
+}
+
+.nextState{
+    border: none;
+    background: transparent;
+    cursor: pointer;
 }
 
 .progressbar .progress {
     height: 100%;
     width: 0px;
     background-color:#00aa00;
+}
+
+.progressbar .progress .percent {
+    display: block;
+    font-size: 11px;
+    line-height: 25px;
+    text-align: center;
+    width: 230px;
 }
