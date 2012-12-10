@@ -20,6 +20,7 @@
 
 #formulario_factura div > input{
     width: 300px;
+    float:right;
 }
 
 #formulario_factura label{
