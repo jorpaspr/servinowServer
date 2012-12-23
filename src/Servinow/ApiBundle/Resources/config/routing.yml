@@ -1,0 +1,24 @@
+servinow_api_confirmar:
+    pattern:  /confirmar
+    defaults: { _controller: ServinowApiBundle:Api:confirmar }
+    requirements:
+        _method: POST
+      
+servinow_api_borrar:
+    pattern: /borrar
+    defaults: { _controller: ServinowApiBundle:Api:borrar }
+    requirements:
+        _method: POST
+      
+servinow_api_consultar:
+    pattern: /consultar
+    defaults: { _controller: ServinowApiBundle:Api:consultar }
+    requiremets:
+        _method: POST
+      
+servinow_api_pagar:
+    pattern: /pagar
+    defaults: { _controller: ServinowApiBundle:Api:pagar }
+    requirements:
+        _method: POST
+    
