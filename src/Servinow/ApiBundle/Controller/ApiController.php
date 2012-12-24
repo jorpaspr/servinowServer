@@ -88,7 +88,7 @@ class ApiController extends Controller
             $json = $request->request->get('DATA');
         }
         else{
-            Return new Response;
+            Return new Response();
         }
         
         $data = json_decode($json, false);
@@ -151,7 +151,7 @@ class ApiController extends Controller
             $json = $request->request->get('DATA');
         }
         else{
-            Return new Response;
+            Return new Response();
         }
         
         $data = json_decode($json, false);
@@ -198,7 +198,7 @@ class ApiController extends Controller
             $json = $request->request->get('DATA');
         }
         else{
-            Return new Response;
+            Return new Response();
         }
         
         $data = json_decode($json, false);
@@ -221,6 +221,111 @@ class ApiController extends Controller
         $em->flush();
         
         $response = new Response();
+        $response->headers->set('Content-Type', 'text/json');
+        $response->setStatusCode(200);
+        
+        return $response;
+    }
+    
+    public function categoriaAction($restaurantID)
+    {
+        $request = $this->getRequest();
+        
+        $categoria_id = ""; 
+        if($request->query->has('categoryid'))
+        {
+            $categoria_id = $request->query->get('categoryid');
+        }
+        else
+        {
+            return new Response();
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $categoria = $em->getRepository('ServinowEntitiesBundle:Categoria')
+                ->find($categoria_id);
+        
+        $data_response = array();
+        if($categoria != null){
+            $i=0;
+            $productos = $categoria->getProductos();
+            foreach ($productos as $producto) {
+                $data_response[$i] = $producto->getId();
+                $i++;
+            }
+        }
+        
+        $json_response = json_encode($data_response);
+        
+        $response = new Response($json_response);
+        $response->headers->set('Content-Type', 'text/json');
+        $response->setStatusCode(200);
+        
+        return $response;
+    }
+    
+    public function restauranteAction($restaurantID){
+        
+        $request = $this->getRequest();
+        
+        $mesa_id = "";
+        if($request->query->has('placeid'))
+        {
+            $mesa_id = $request->query->get('placeid');
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $restaurante = $em->getRepository('ServinowEntitiesBundle:Restaurante')
+                ->find($restaurantID);
+        
+        $data_response['onlineID'] = $restaurantID;
+        $data_response['lastUpdate'] = $restaurante->getUltimaActualizacion();
+        $data_response['name'] = $restaurante->getNombre();
+        $data_response['tax'] = $restaurante->getImpuesto();
+        $data_response['emailPayPalAccount'] = $restaurante->getemailCuentaPaypal();
+        
+        $data_response['places'] = array();
+        $mesas = $restaurante->getMesas();
+        $i=0;
+        foreach ($mesas as $mesa) {
+            $data_response['places'][$i]['onlineID'] = $mesa->getId();
+            $data_response['places'][$i]['lastUpdate'] = $mesa->getUltimaActualizacion();
+            $i++;
+        }
+        
+        $data_response['categories'] = array();
+        $categorias = $restaurante->getCategorias();
+        $i=0;
+        foreach ($categorias as $categoria) {
+            $data_response['categories'][$i]['id'] = $categoria->getId();
+            $data_response['categories'][$i]['nombre'] = $categoria->getNombre();
+            $data_response['categories'][$i]['imageName'] = $categoria->getImagen();
+            $i++;
+        }
+        
+        $data_response['products'] = array();
+        $productos = $restaurante->getProductos();
+        $i=0;
+        foreach ($productos as $producto) {
+            $data_response['products'][$i]['id'] = $producto->getId();
+            $data_response['products'][$i]['nombre'] = $producto->getNombre();
+            $data_response['products'][$i]['descripcion'] = $producto->getDescripcion();
+            $data_response['products'][$i]['tipo'] = "";
+            $data_response['products'][$i]['precio'] = $precio = $producto->getPrecio();
+            $disponible = true;
+            if($producto->getDisponible() == 0){
+                $disponible = false;
+            }
+            $data_response['products'][$i]['disponible'] = $disponible;
+            $data_response['products'][$i]['imageName'] = $producto->getImagen();
+            $i++;
+        }
+        
+        $json_response = json_encode($data_response);
+        
+        $response = new Response($json_response);
         $response->headers->set('Content-Type', 'text/json');
         $response->setStatusCode(200);
         

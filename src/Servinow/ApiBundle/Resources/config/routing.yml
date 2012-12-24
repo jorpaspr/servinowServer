@@ -21,4 +21,16 @@ servinow_api_pagar:
     defaults: { _controller: ServinowApiBundle:Api:pagar }
     requirements:
         _method: POST
+        
+servinow_api_categoria:
+    pattern: /categoria
+    defaults: { _controller: ServinowApiBundle:Api:categoria }
+    requirements:
+        _method: GET
+
+servinow_api_restaurante:
+    pattern: /restaurante
+    defaults: { _controller: ServinowApiBundle:Api:restaurante }
+    requirements: 
+        _method: GET
     
