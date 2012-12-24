@@ -70,7 +70,13 @@ class ApiController extends Controller
         }
         $em->flush();
         
-        return new Response(json_encode($id_pedido_online));
+        $json_response = json_encode($id_pedido_online);
+        
+        $response = new Response($json_response);
+        $response->headers->set('Content-Type', 'text/json');
+        $response->setStatusCode(200);
+        
+        return $response;
     }
     
     public function borrarAction($restaurantID)
@@ -95,9 +101,43 @@ class ApiController extends Controller
         $linea_pedido_local = $data->linea_pedido_local;
         $cantidad = $data->cantidad;
         
-        $json_response = json_encode($datos);
+        $linea_pedido = $em->getRepository('ServinowEntitiesBundle:LineaPedido')->findOneBy(array(
+            'id'=> $linea_pedido_local,
+            'pedido'=> $pedido_id_online
+            ));
+        $ok = 1;
+        if($linea_pedido == null){
+            $ok=0;
+        }
+        else{
+            $cantidad_actual = $linea_pedido->getCantidad() - $cantidad;
+            if($cantidad_actual >= 1 )
+            {
+                $linea_pedido->setCantidad($cantidad_actual);
+            }
+            else
+            {
+                $em->remove($linea_pedido);
+            }
+            $em->flush();
+            
+            $lineas_pedido = $em->getRepository('ServinowEntitiesBundle:LineaPedido')
+                    ->findBy(array('pedido' => $pedido_id_online));
+
+            $numero_lineas_pedido = count($lineas_pedido);
+            if($numero_lineas_pedido < 1){
+                $pedido = $em->getRepository('ServinowEntitiesBundle:Pedido')
+                        ->find($pedido_id_online);
+                $em->remove($pedido);
+                $em->flush();
+            }
+        }
+        
+        $json_response = json_encode($ok);
         
         $response = new Response($json_response);
+        $response->headers->set('Content-Type', 'text/json');
+        $response->setStatusCode(200);
         
         return $response;
     }
@@ -122,14 +162,29 @@ class ApiController extends Controller
         $mesa_id = $data->mesa_id;
         $pedido_id_online = $data->pedido_id_online;
         
+        $data_response = array();
+        $i=0;
         foreach ($pedido_id_online as $pIdOnline) {
             $pedidoId = $pIdOnline->pedido_id_online;
+            $data_response[$i]['pedido_id_online'] = $pedidoId;
+            $lineas_pedido = $em->getRepository('ServinowEntitiesBundle:LineaPedido')
+                    ->findBy(array('pedido' => $pedidoId));
+            $j=0;
+            $data_response[$i]['lineas_pedido'] = array();
+            foreach ($lineas_pedido as $linea_pedido) {                
+                $data_response[$i]['lineas_pedido'][$j]['linea_pedido_id'] = $linea_pedido->getId();
+                $data_response[$i]['lineas_pedido'][$j]['estado'] = $linea_pedido->getEstado();
+                $j++;
+            }
+            $i++;
         }
         
         
-        $json_response = json_encode($datos);
+        $json_response = json_encode($data_response);
         
         $response = new Response($json_response);
+        $response->headers->set('Content-Type', 'text/json');
+        $response->setStatusCode(200);
         
         return $response;
     }
@@ -165,6 +220,10 @@ class ApiController extends Controller
         
         $em->flush();
         
-        return new Response();
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/json');
+        $response->setStatusCode(200);
+        
+        return $response;
     }
 }
