@@ -13,12 +13,12 @@ servinow_api_borrar:
 servinow_api_consultar:
     pattern: /consultar
     defaults: { _controller: ServinowApiBundle:Api:consultar }
-    requiremets:
+    requirements:
         _method: POST
       
 servinow_api_pagar:
     pattern: /pagar
-    defaults: { _controller: ServinowApiBundle:Api:pagar }
+    defaults: { _controller: ServinowApiBundle:Api:pagar }
     requirements:
         _method: POST
     
