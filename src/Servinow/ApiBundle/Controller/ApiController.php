@@ -312,7 +312,7 @@ class ApiController extends Controller
             $data_response['products'][$i]['id'] = $producto->getId();
             $data_response['products'][$i]['nombre'] = $producto->getNombre();
             $data_response['products'][$i]['descripcion'] = $producto->getDescripcion();
-            $data_response['products'][$i]['tipo'] = "";
+            $data_response['products'][$i]['tipo'] = "PLATO";
             $data_response['products'][$i]['precio'] = $precio = $producto->getPrecio();
             $disponible = true;
             if($producto->getDisponible() == 0){
