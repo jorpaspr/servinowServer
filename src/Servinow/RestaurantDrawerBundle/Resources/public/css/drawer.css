@@ -8,7 +8,7 @@
 
 #drawerContainer{
 	overflow: hidden;
-	width: 1400px;
+	width: 1290px;
 	padding: 20px;
 	margin: 0 auto;
 }
@@ -158,6 +158,11 @@
 	width: 0.8em;
 	height: 0.8em;
 	text-align: center;
+	display: none;
+}
+
+.objectElement:hover .handler{
+	display: block;
 }
 
 .objectElement.ui-draggable-dragging .handler {
